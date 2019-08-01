@@ -1,0 +1,26 @@
+menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+  
+}
+
+img{
+    width:60px;
+    height: 60px;;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+li{
+    margin: 0 30px ;
+}
