@@ -1,0 +1,9 @@
+.card{
+    background-image: url('/images/lula.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 45%;
+    border-radius: 5px;
+}
+

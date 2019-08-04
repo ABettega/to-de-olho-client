@@ -1,19 +1,21 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./components/Main/Main";
+import Navbar from "./components/Navbar";
+import Main from "./components/MainPage/";
+import SignUpForm from "./components/SignUpForm";
 import { Switch, Route } from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
         <Navbar/>
         <Switch>
-          <Route exact path='/' render={(props) => <Main {...props}/>}></Route>
+          <Route exact path='/' render={() => <Main/>}></Route>
+          <Route exact path='/signup' render={() => <SignUpForm/>}></Route>
         </Switch>
-      </div>
+      </Fragment>
     );
   }
 }

@@ -1,0 +1,13 @@
+.ligth-green{
+    background-color: #89ce64;
+}
+
+button{
+    border:none;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 15px 100px;
+    color:white;
+    font-weight: 700;
+    font-size: 15px;
+}

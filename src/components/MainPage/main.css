@@ -1,0 +1,28 @@
+/* ROXO: #7469bf 
+   VERDE PRINCIPAL: #4bbf5b
+   VERDE SECUNDÁRIO: #2da661
+   VERDE CLARO: #9cdab1
+   CINZA: #f2f2f2
+   VERDE BOTÃO: #89ce64*/
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:#4bbf5b;
+    height: 260px;
+}
+
+h1{
+    font-family: 'Merienda', cursive;
+    font-size: 50px;
+    color:white;
+    padding-bottom: 40px;
+}
+
+h3{
+    color:white;
+    text-align: center;
+    padding: 20px 40px;
+}
