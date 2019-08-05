@@ -8,7 +8,7 @@ class ResearchPage extends Component {
     super(props);
 
     this.state={
-        name:"",
+        search:"",
         deputados:[],
     }
     this.service = new AuthService();
@@ -25,21 +25,17 @@ class ResearchPage extends Component {
 
 
   handleChange(event) {
-    console.log(this.state.deputados)
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const { value } = event.target;
+    this.setState({ search: value });
   }
 
   render() {
     return (
       <>
-        <input name="name" type="text" value={this.state.name} placeholder="Pesquise seu político" onChange={(e)=>this.handleChange(e)} />
+        <input name="name" type="text" value={this.state.search} placeholder="Pesquise seu político" onChange={(e)=>this.handleChange(e)} />
         <div>
-            {this.state.deputados.filter(deputado => {
-            deputado.nomeDeputado.toUpperCase().includes(this.state.name.toUpperCase())
-            }).map(deputado => {
-              console.log(deputado.nomeDeputado);
-              return <CardPolitico>{deputado.nomeDeputado}</CardPolitico>
+            {this.state.deputados.filter(deputado => deputado.nomeDeputado.toUpperCase().includes(this.state.search.toUpperCase())).map(deputado => {
+              return <CardPolitico key={deputado._id}>{deputado.nomeDeputado}</CardPolitico>
             })}
           </div>
       </>
