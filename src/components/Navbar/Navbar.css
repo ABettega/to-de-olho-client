@@ -5,16 +5,26 @@
         left: 0;
         width:100%;
         display: flex;
-        justify-content: space-around;
-        background-color: #4bbf5b 
+        justify-content: center;
+        background-color: #4bbf5b;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding: 10px 0;
     }
-    
+ 
     nav img{
-        width:60px;
-        height: 60px;
+        width:35px;
+        height: 35px;
     }
+
+    nav div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     
-    nav ul{
+    .nav-ul{
         display: flex;
         list-style: none;
         flex-wrap: nowrap;

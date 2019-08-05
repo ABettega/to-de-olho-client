@@ -9,8 +9,10 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color:#4bbf5b;
+    justify-content: center;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
     height: 260px;
 }
 
@@ -18,11 +20,10 @@ h1{
     font-family: 'Merienda', cursive;
     font-size: 50px;
     color:white;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
 }
 
 h3{
     color:white;
     text-align: center;
-    padding: 20px 40px;
 }

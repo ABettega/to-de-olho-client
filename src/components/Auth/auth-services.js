@@ -38,6 +38,12 @@ class AuthService {
     .then(response => response.data)
     .catch(err => console.log(err))
   }
+
+  senadores(){
+    return this.service.get("/senadores")
+    .then(response => response.data)
+    .catch(err => console.log(err))
+  }
 }
 
 export default AuthService;

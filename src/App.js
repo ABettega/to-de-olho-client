@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Main from "./pages/MainPage/";
 import SignUpForm from "./pages/SignUpForm";
 import ResearchPage from "./pages/ResearchPage"
+import DetailsDeputados from "./pages/DetailsDeputados"
 import LoginForm from "./pages/Login"
 import { Switch, Route } from 'react-router-dom';
 
@@ -18,6 +19,8 @@ class App extends Component {
           <Route exact path='/entrar' render={() => <SignUpForm/>}></Route>
           <Route exact path='/pesquisar' render={() => <ResearchPage/>}></Route>
           <Route exact path='/login' render={() => <LoginForm/>}></Route>
+          <Route exact path='/deputados/:id' render={(props) => <DetailsDeputados {...props}/>}></Route>
+
         </Switch>
       </Fragment>
     );

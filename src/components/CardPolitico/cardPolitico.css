@@ -1,9 +1,19 @@
 .card{
-    background-image: url('/images/lula.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 200px;
     width: 45%;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 }
 
+.nome-card-politico{
+   background-color: white;
+   width:100%;
+   height: fit-content;
+   text-align: center;
+   border-bottom-right-radius: 5px;
+   border-bottom-left-radius: 5px;
+}
