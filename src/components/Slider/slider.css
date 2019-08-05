@@ -1,0 +1,12 @@
+@media (max-width: 576px) {
+  .slider {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .card-slider {
+    flex-shrink: 0;
+    margin: 0 2px;
+  }
+}

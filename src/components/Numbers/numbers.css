@@ -1,0 +1,7 @@
+
+.numbers-div{
+    display:flex;
+    justify-content: space-between;
+    width:80%;
+    padding: 10px;
+}
