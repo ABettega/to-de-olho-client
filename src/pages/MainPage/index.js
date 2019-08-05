@@ -24,7 +24,7 @@ class Main extends Component {
         <main>
           <h1 className="white">Tô de Olho</h1>
           <h3>A melhor plataforma para você acompanhar de perto os seus políticos</h3>
-          <Button class="ligth-green">FIQUE DE OLHO</Button>
+          <Button class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
         </main>
         <Numbers number={this.state.votedLaws} lawName="votedLaws">
           Projetos Votados
