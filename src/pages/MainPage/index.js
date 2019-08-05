@@ -1,11 +1,11 @@
 /* eslint-disable no-loop-func */
 import React, { Component, Fragment } from "react";
 import "./main.css";
-import Button from "../Button";
-import Numbers from "../Numbers";
-import CardPolitico from "../CardPolitico/CardPolitico";
-import CardNews from "../CardNews/CardNews";
-import Slider from "../Slider";
+import Button from "../../components/AButton";
+import Numbers from "../../components/Numbers";
+import CardPolitico from "../../components/CardPolitico/CardPolitico";
+import CardNews from "../../components/CardNews/CardNews";
+import Slider from "../../components/Slider";
 
 class Main extends Component {
   constructor(props) {

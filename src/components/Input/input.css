@@ -1,4 +1,8 @@
 input{
     padding: 10px 5px;
     margin: 5px;
+    border-radius: 5px;
+    border-width: 0px;
+    color: gray;
+    font-size: 16px;
 }

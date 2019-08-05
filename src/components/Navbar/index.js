@@ -5,10 +5,12 @@ import "./navbar.css";
 const Navbar = () => {
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Explorar</Link></li>
-        <img src="/images/example-logo.png"/>
-        <li><Link to="/signup">Entrar</Link></li>
+      <ul className="nav-ul">
+        <li><Link className="nav-a" to="/">Explorar</Link></li>
+        <img src="/images/logo.svg" alt="Logo do Tô de Olho"/>
+        <li><Link className="nav-a" to="/entrar">Entrar</Link></li>
+        <li><Link className="nav-a" to="/pesquisar">Pesquisar</Link></li>
+
       </ul>
     </nav>
   );

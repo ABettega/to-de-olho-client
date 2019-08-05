@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Input from "../Input";
-import AuthService from "../Auth/auth-services";
-import Button from "../Button";
-import Select from "../Select";
+import Input from "../../components/Input";
+import AuthService from "../../components/Auth/auth-services";
+import Button from "../../components/AButton";
+import Select from "../../components/Select";
 import "./form.css";
 
 class Form extends Component {
@@ -16,7 +16,8 @@ class Form extends Component {
       gender: "",
       day: "",
       month: "",
-      year: ""
+      year: "",
+      userExists:false
     };
     this.service = new AuthService();
     this.handleFormSubimt = this.handleFormSubimt.bind(this);
@@ -35,11 +36,15 @@ class Form extends Component {
       month,
       year
     } = this.state;
-    console.log(this.state.year);
-    console.log(firstName, lastName, password, email, gender, day, month, year);
-    this.service
-      .signup(firstName, lastName, password, email, gender, day, month, year)
+    console.log(firstName,lastName,password,email,gender,day,month,year)
+
+    this.service.signup(firstName, lastName, password, email, gender, day, month, year)
       .then(response => {
+        if(response){
+          this.setState({
+            userExists:true
+          })
+        }
         this.setState({
           firstName: "",
           lastName: "",
@@ -48,7 +53,8 @@ class Form extends Component {
           gender: "",
           day: "",
           month: "",
-          year: ""
+          year: "",
+          userExists:false
         });
       })
       .catch(error => console.log(error));
@@ -95,39 +101,7 @@ class Form extends Component {
           <Select
             name="day"
             placeholder="Dia"
-            options={[
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              29,
-              30,
-              31
-            ]}
+            options={[1,2,31]}
             change={e => this.handleChange(e)}
             value={this.state.day}
           />
@@ -166,7 +140,7 @@ class Form extends Component {
           change={e => this.handleChange(e)}
           value={this.state.password}
         />
-        <Button type="submit">Submit</Button>
+        <button className="button-a ligth-green" type="submit">Submit</button>
       </form>
     );
   }

@@ -6,29 +6,28 @@
         width:100%;
         display: flex;
         justify-content: space-around;
-        background-color: white;
-      
+        background-color: #4bbf5b 
     }
     
-    img{
+    nav img{
         width:60px;
-        height: 60px;;
+        height: 60px;
     }
     
-    ul{
+    nav ul{
         display: flex;
         list-style: none;
         flex-wrap: nowrap;
-        justify-content: center;
         align-items: center;
     }
     
-    li{
+    nav li{
         margin: 0 30px ;
     }
     
-    a{
+    .nav-a{
         text-decoration: none;
-
+        color: white;
+        font-weight: 700
     }
 }

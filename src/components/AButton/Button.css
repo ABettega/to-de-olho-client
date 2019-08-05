@@ -2,12 +2,20 @@
     background-color: #89ce64;
 }
 
-button{
+.ligth-green:hover{
+    background-color:  #2da661
+}
+
+.ligth-green:active{
+    background-color:  #2da661
+}
+
+.button-a{
     border:none;
     border-radius: 30px;
     box-sizing: border-box;
     padding: 15px 100px;
     color:white;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
 }
