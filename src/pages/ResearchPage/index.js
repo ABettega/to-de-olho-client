@@ -9,7 +9,7 @@ class ResearchPage extends Component {
 
     this.state={
         name:"",
-        deputados:"",
+        deputados:[],
     }
     this.service = new AuthService();
   }
@@ -18,13 +18,14 @@ class ResearchPage extends Component {
     this.service.deputados()
     .then(response => {
       this.setState({
-      deputados: [response.data]
+      deputados: [...response]
     } )})
     .catch(err => console.log(err))
   }
 
 
   handleChange(event) {
+    console.log(this.state.deputados)
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
@@ -34,7 +35,10 @@ class ResearchPage extends Component {
       <>
         <input name="name" type="text" value={this.state.name} placeholder="Pesquise seu político" onChange={(e)=>this.handleChange(e)} />
         <div>
-            {this.state.deputados.filter(deputado => deputado.nomeDeputado.toUpperCase().includes(this.state.name.toUpperCase())).map(deputado => {
+            {this.state.deputados.filter(deputado => {
+            deputado.nomeDeputado.toUpperCase().includes(this.state.name.toUpperCase())
+            }).map(deputado => {
+              console.log(deputado.nomeDeputado);
               return <CardPolitico>{deputado.nomeDeputado}</CardPolitico>
             })}
           </div>

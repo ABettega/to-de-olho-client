@@ -63,6 +63,12 @@ class Form extends Component {
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    switch(name){
+      case 'email':
+        if(name.includes("@") && name.includes("."))
+        break;
+      default:
+    }
   }
 
   render() {
