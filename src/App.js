@@ -18,7 +18,7 @@ class App extends Component {
           <Route exact path='/entrar' render={() => <SignUpForm/>}></Route>
           <Route exact path='/pesquisar' render={() => <ResearchPage/>}></Route>
           <Route exact path='/login' render={() => <LoginForm/>}></Route>
-          <Route path='/deputado/:id' render={() => <DetailsDeputados/>}></Route>
+          <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
         </Switch>
       </Fragment>
     );
