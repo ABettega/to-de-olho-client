@@ -21,9 +21,7 @@ class AuthService {
         month,
         year
       })
-      .then(response => {
-        return response.data
-      })
+      .then(response => response.data)
       .catch(err => console.log(err));
   }
 

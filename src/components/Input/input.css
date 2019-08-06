@@ -3,6 +3,7 @@ input{
     margin: 5px;
     border-radius: 5px;
     border-width: 0px;
+    outline: none;
     color: gray;
     font-size: 16px;
 }

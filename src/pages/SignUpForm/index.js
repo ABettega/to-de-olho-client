@@ -50,14 +50,6 @@ class Form extends Component {
           .then(response => {
             if (response.error === true) {
               this.setState({
-                firstName: "",
-                lastName: "",
-                password: "",
-                email: "",
-                gender: "",
-                day: "",
-                month: "",
-                year: "",
                 error: true,
                 errorMessage: 'Este usuário já existe no banco de dados!'
               });
@@ -109,7 +101,6 @@ class Form extends Component {
     }
     return (
       <form onSubmit={e => this.handleFormSubmit(e)} className="form">
-        <label>{erro}</label>
         <h1>Sign Up</h1>
         <Input
           type="text"
@@ -191,6 +182,7 @@ class Form extends Component {
           value={this.state.password}
         />
         <button className="button-a ligth-green" type="submit">Submit</button>
+        <label className='mensagem-erro'>{erro}</label>
       </form>
     );
   }
