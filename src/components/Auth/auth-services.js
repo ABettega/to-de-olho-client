@@ -37,7 +37,7 @@ class AuthService {
 
   deputados() {
     return this.service
-      .get("/deputados")
+      .get("/deputados/atuais")
       .then(response => response.data)
       .catch(err => console.log(err));
   }

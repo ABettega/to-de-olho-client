@@ -3,7 +3,6 @@ import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
-import Snackbar from 'node-snackbar';
 
 class ResearchPage extends Component {
   constructor(props) {
@@ -35,6 +34,7 @@ class ResearchPage extends Component {
     this.service
       .deputados()
       .then(response => {
+        console.log(response);
         this.setState({
           deputados: [...response]
         });
@@ -42,12 +42,11 @@ class ResearchPage extends Component {
       .catch(err => console.log(err));
     this.service
       .senadores()
-      .then(response =>{
+      .then(response => {
         this.setState({
           senadores: [...response]
-        })
-      }
-      )
+        });
+      })
       .catch(err => console.log(err));
   }
 
@@ -57,12 +56,13 @@ class ResearchPage extends Component {
   }
 
   titleCase(str) {
-    let splitStr = str.toLowerCase().split(' ');
+    let splitStr = str.toLowerCase().split(" ");
     for (let i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+      splitStr[i] =
+        splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
-    return splitStr.join(' '); 
- }
+    return splitStr.join(" ");
+  }
 
   render() {
     if (this.state.loginMessage !== undefined) {
@@ -78,39 +78,45 @@ class ResearchPage extends Component {
     }
     return (
       <>
-        {/* <label>{this.state.loginMessage}</label> */}
-        <input
-          name="name"
-          type="text"
-          value={this.state.search}
-          placeholder="Pesquise seu político"
-          onChange={e => this.handleChange(e)}
-          className="pesquisar"
-        />
-        <div>
-          <h2>Senadores</h2>
-          <Slider>
-            {this.state.senadores
-              .filter(senador =>
-                senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
-                  this.state.search.toUpperCase()
+       <input
+            name="name"
+            type="text"
+            value={this.state.search}
+            placeholder="Pesquise seu político"
+            onChange={e => this.handleChange(e)}
+            className="pesquisar"
+          />
+        <div className="center">
+         
+          <div className="half-page">
+            <img className="congresso-img" src="./images/senado.png" />
+            <Slider>
+              {this.state.senadores
+                .filter(senador =>
+                  senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
+                    this.state.search.toUpperCase()
+                  )
                 )
-              )
-              .map(senador => {
-                return (
-                   <CardPolitico
-                    key={senador._id} id={senador._id} politician="/senador/" politicianName={senador.IdentificacaoParlamentar.NomeParlamentar} uf={senador.IdentificacaoParlamentar.UfParlamentar}
-                    backImage={
-                      senador.IdentificacaoParlamentar.UrlFotoParlamentar
-                    }
-                  >
-                  </CardPolitico>
-                );
-              })}
-          </Slider>
-        </div>
-        <div>
-        <h2>Deputados</h2>
+                .map(senador => {
+                  return (
+                    <CardPolitico
+                      key={senador._id}
+                      id={senador._id}
+                      politician="/senador/"
+                      politicianName={this.titleCase(
+                        senador.IdentificacaoParlamentar.NomeParlamentar
+                      )}
+                      uf={senador.IdentificacaoParlamentar.UfParlamentar}
+                      backImage={
+                        senador.IdentificacaoParlamentar.UrlFotoParlamentar
+                      }
+                    />
+                  );
+                })}
+            </Slider>
+          </div>
+          <div className="half-page">
+          <img className="congresso-img" src="./images/deputados.png" />
           <Slider>
             {this.state.deputados
               .filter(deputado =>
@@ -120,12 +126,18 @@ class ResearchPage extends Component {
               )
               .map(deputado => {
                 return (
-                  <CardPolitico key={deputado.id} id={deputado.id} politician="/deputado/" backImage={deputado.urlFoto}>
-                    {this.titleCase(deputado.nomeDeputado)}
-                  </CardPolitico>
+                  <CardPolitico
+                    key={deputado.id}
+                    id={deputado.id}
+                    politician="/deputado/"
+                    politicianName={this.titleCase(deputado.nomeDeputado)}
+                    uf={deputado.siglaUf}
+                    backImage={deputado.urlFoto}
+                  />
                 );
               })}
           </Slider>
+          </div>
         </div>
       </>
     );
