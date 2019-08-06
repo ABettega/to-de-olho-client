@@ -25,18 +25,35 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-  login(email,password) {
-    return this.service.post("/auth/login",{
-      username: email ,password
-    })
-    .then(response => response.data)
-    .catch(err=>console.log(err))
+  login(email, password) {
+    return this.service
+      .post("/auth/login", {
+        username: email,
+        password
+      })
+      .then(response => response.data)
+      .catch(err => console.log(err));
   }
 
-  deputados(){
-    return this.service.get("/deputados")
-    .then(response => response.data)
-    .catch(err => console.log(err))
+  deputados() {
+    return this.service
+      .get("/deputados")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  senadores() {
+    return this.service
+      .get("/senadores")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  detailsdeputados(id) {
+    return this.service
+      .get(`/deputados/sessoes/${id}`)
+      .then(response => response.data)
+      .catch(err => console.log(err));
   }
 }
 
