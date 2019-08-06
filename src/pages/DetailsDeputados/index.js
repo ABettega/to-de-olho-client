@@ -15,11 +15,19 @@ class DetailsDeputados extends Component {
     
   }
 
+  toCapitalized = (str) => {
+    return str.toLowerCase().split(' ').map(a => a[0].toUpperCase() + a.slice(1)).join(' ');
+  }
+
   componentDidMount() {
     axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}`)
     .then(politician => {
-      const {legislaturas, sessoes, votos} = politician.data;
+      const {legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto} = politician.data;
       this.setState({
+        politicianName: this.toCapitalized(nomeDeputado),
+        partido: partido,
+        uf: uf,
+        foto: foto,
         legislaturas: legislaturas,
         sessoes: {
           total: sessoes.total,
@@ -40,16 +48,16 @@ class DetailsDeputados extends Component {
   }
   
   render() {
-    const {politicianName, uf, backImage} = this.props.location.state;
     return (
       <Fragment>
         {this.state.legislaturas ? 
         <div>
           <div className="politician-info-container">
-            <img src={backImage} alt={`Foto do deputado ${politicianName}`}/>
+            <img src={this.state.foto} alt={`Foto do deputado ${this.state.politicianName}`}/>
             <div className="politician-info">
-              <p>Nome: {politicianName}</p>
-              <p>Partido: {uf}</p>
+              <p>Nome: {this.state.politicianName}</p>
+              <p>Partido: {this.state.partido}</p>
+              <p>UF: {this.state.uf}</p>
               <ul> Legislaturas: 
               {this.state.legislaturas.map((legis, idx) => {
                 return (
@@ -64,8 +72,10 @@ class DetailsDeputados extends Component {
               </ul>
             </div>
           </div>
-          <p>Presente em {this.state.sessoes.percentualPresenca} das sessões.</p>
-          <p>Votou em {this.state.votos.percentualSobrePresenca} das sessões que compareceu.</p>
+          <p>Presente em {this.state.sessoes.percentualPresenca} ({this.state.sessoes.presente}/{this.state.sessoes.total}) das sessões.</p>
+          <p>Votou em {this.state.votos.percentualSobrePresenca} ({this.state.votos.total}/{this.state.sessoes.presente}) das sessões que compareceu.</p>
+          <p>Obstruiu a votação {this.state.votos.obstrucao} vezes</p>
+          <p><span>(Obstruções contam como 'presença' na votação)</span></p>
         </div>
         :
         <div className="loading-icon-container">
