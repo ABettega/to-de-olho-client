@@ -28,10 +28,11 @@ class ResearchPage extends Component {
       .catch(err => console.log(err));
     this.service
       .senadores()
-      .then(response =>
+      .then(response =>{
         this.setState({
           senadores: [...response]
         })
+      }
       )
       .catch(err => console.log(err));
   }
@@ -72,12 +73,11 @@ class ResearchPage extends Component {
               .map(senador => {
                 return (
                    <CardPolitico
-                    key={senador._id} id={senador._id} politician="/senador/"
+                    key={senador._id} id={senador._id} politician="/senador/" politicianName={senador.IdentificacaoParlamentar.NomeParlamentar} uf={senador.IdentificacaoParlamentar.UfParlamentar}
                     backImage={
                       senador.IdentificacaoParlamentar.UrlFotoParlamentar
                     }
                   >
-                    {senador.IdentificacaoParlamentar.NomeParlamentar}
                   </CardPolitico>
                 );
               })}
