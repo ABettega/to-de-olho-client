@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./navbar.css";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
@@ -14,7 +14,7 @@ const Navbar = () => {
                 src="./images/user.png"
                 alt="Imagem para entrar"
               />
-              Entrar
+              Login
             </div>
           </Link>
         </li>
