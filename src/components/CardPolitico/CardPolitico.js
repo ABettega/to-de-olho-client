@@ -4,9 +4,9 @@ import './cardPolitico.css'
 
 const CardPolitico = props => {
   return (
-     <div style={{backgroundImage: `url(${props.backImage})`}} className="card card-slider">
-      <Link className="nome-card-politico" to={"/deputados/"+ props.id}>{props.children}</Link>
-    </div>
+    <Link className="card-slider" to={props.politician+ props.id}><div style={{backgroundImage: `url(${props.backImage})`}} className="card">
+      <div className="elipse"></div>
+    </div></Link>
   );
 };
 

@@ -1,10 +1,34 @@
 import React, { Component } from "react";
-import Input from "../../components/Input";
+import AuthService from "../../components/Auth/auth-services";
 
-const DetailsDeputados = () => {
-    return ( 
-        <div></div>
-     );
+
+class DetailsDeputados extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state={
+
+    }
+    this.service = new AuthService();
+
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <p>Nome: </p>
+          <p>Partido: </p>
+        </div>
+        <ul>
+          {}
+          <li />
+        </ul>
+        <p>Presença:</p>
+        <p>Votos: </p>
+      </div>
+    );
+  }
 }
- 
+
 export default DetailsDeputados;

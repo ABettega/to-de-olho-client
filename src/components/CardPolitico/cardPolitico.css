@@ -1,9 +1,8 @@
 .card{
     background-repeat: no-repeat;
     background-size: cover;
-    height: 200px;
-    width: 45%;
-    border-radius: 5px;
+    height: 100%;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -17,3 +16,10 @@
    border-bottom-right-radius: 5px;
    border-bottom-left-radius: 5px;
 }
+
+.elipse {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: linear-gradient(to bottom, #a0de2c, rgba(5, 245, 220, 0));
+   }

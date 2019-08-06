@@ -44,7 +44,7 @@ class ResearchPage extends Component {
   titleCase(str) {
     let splitStr = str.toLowerCase().split(' ');
     for (let i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
     return splitStr.join(' '); 
  }
@@ -72,7 +72,7 @@ class ResearchPage extends Component {
               .map(senador => {
                 return (
                    <CardPolitico
-                    key={senador._id}
+                    key={senador._id} id={senador._id} politician="/senador/"
                     backImage={
                       senador.IdentificacaoParlamentar.UrlFotoParlamentar
                     }
@@ -94,7 +94,7 @@ class ResearchPage extends Component {
               )
               .map(deputado => {
                 return (
-                  <CardPolitico key={deputado.id} id={deputado.id} backImage={deputado.urlFoto}>
+                  <CardPolitico key={deputado.id} id={deputado.id} politician="/deputado/" backImage={deputado.urlFoto}>
                     {this.titleCase(deputado.nomeDeputado)}
                   </CardPolitico>
                 );

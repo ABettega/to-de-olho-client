@@ -5,4 +5,5 @@ input{
     border-width: 0px;
     color: gray;
     font-size: 16px;
+    outline: none;
 }

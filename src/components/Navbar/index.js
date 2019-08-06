@@ -19,9 +19,9 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link className="nav-a" to="/">
+          <Link className="nav-a home" to="/">
             <div>
-              <img id="home" src="./images/home.png" alt="Imagem para home" />
+              <img src="./images/home.png" alt="Imagem para home" />
               Home
             </div>
           </Link>
