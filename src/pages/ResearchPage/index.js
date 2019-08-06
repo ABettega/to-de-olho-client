@@ -8,15 +8,29 @@ class ResearchPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      search: "",
-      deputados: [],
-      senadores: []
-    };
+    if (this.props.location.state)
+      this.state = {
+        search: "",
+        deputados: [],
+        senadores: [],
+        loginMessage: this.props.location.state.loginMessage
+      };
+    else
+      this.state = {
+        search: "",
+        deputados: [],
+        senadores: [],
+      };
+
     this.service = new AuthService();
   }
 
   componentDidMount() {
+    window.setTimeout(() => {
+      this.setState({
+        loginMessage: ''
+      })
+    }, 3000);
     this.service
       .deputados()
       .then(response => {
@@ -51,6 +65,17 @@ class ResearchPage extends Component {
   }
 
   render() {
+    if (this.state.loginMessage !== undefined) {
+      Snackbar.show({
+        pos: 'top-left',
+        text: this.state.loginMessage,
+        showAction: false,
+        backgroundColor: '#4BBF5B',
+        textColor: '#FFF',
+        width: '175px',
+        customClass: 'padding-left: 10px'
+      })
+    }
     return (
       <>
        <input

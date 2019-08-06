@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./navbar.css";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
@@ -11,17 +11,17 @@ const Navbar = () => {
             <div>
               <img
                 id="entrar"
-                src="./images/user.png"
+                src="/images/user.png"
                 alt="Imagem para entrar"
               />
-              Entrar
+              Login
             </div>
           </Link>
         </li>
         <li>
           <Link className="nav-a home" to="/">
             <div>
-              <img src="./images/home.png" alt="Imagem para home" />
+              <img src="/images/home.png" alt="Imagem para home" />
               Home
             </div>
           </Link>
@@ -31,7 +31,7 @@ const Navbar = () => {
             <div>
               <img
                 id="pesquisar"
-                src="./images/pesquisar.png"
+                src="/images/pesquisar.png"
                 alt="Imagem para pesquisar"
               />
               Pesquisar
