@@ -11,30 +11,53 @@ class LoginForm extends Component {
       email: "",
     };
     this.service = new AuthService();
-    this.handleFormSubimt = this.handleFormSubimt.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleFormSubimt(event) {
+  handleFormSubmit(event) {
     event.preventDefault();
     const {
       password,
       email,
     } = this.state;
 
-    this.service.login( email, password)
-      .then(response => {
-        if(response){
-          this.setState({
-            userExists:true
+    if (this.validaEmail(email)) {
+      if (password !== '' && email !== '') {
+        this.service.login(email, password)
+          .then(response => {
+            if (response.error === true) {
+              this.setState({
+                error: true,
+                errorMessage: 'Usuário ou senha incorretos!'
+              });
+            } else {
+              this.setState({
+                password: "",
+                email: "",
+                error: false,
+                errorMessage: ''
+              });
+            }
           })
-        }
+          .catch(e => console.log('e'));
+      } else {
         this.setState({
-          password: "",
-          email: "",
+          error: true,
+          errorMessage: 'Todos os dados precisam ser preenchidos!',
         });
-      })
-      .catch(error => console.log(error));
+      }        
+    } else {
+      this.setState({
+        error: true,
+        errorMessage: 'O email digitado é inválido!',
+      });
+    }
+  }
+
+  validaEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   handleChange(event) {
@@ -43,10 +66,15 @@ class LoginForm extends Component {
   }
 
   render() {
+    let erro = '';
+    if (this.state.error === true) {
+      erro = this.state.errorMessage;
+    }
     return (
-      <form onSubmit={e => this.handleFormSubimt(e)} className="form">
+      <form onSubmit={e => this.handleFormSubmit(e)} className="form">
         <h1>Login</h1>
         <Input
+          required='true'
           type="text"
           name="email"
           placeholder="Endereço de E-mail"
@@ -54,6 +82,7 @@ class LoginForm extends Component {
           value={this.state.email}
         />
         <Input
+          required='true'
           type="password"
           name="password"
           placeholder="Senha"
@@ -61,6 +90,7 @@ class LoginForm extends Component {
           value={this.state.password}
         />
         <button className="button-a ligth-green" type="submit">Login</button>
+        <label className="mensagem-erro">{erro}</label>
       </form>
     );
   }

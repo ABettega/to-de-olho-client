@@ -17,14 +17,20 @@ class Form extends Component {
       day: "",
       month: "",
       year: "",
-      userExists:false
+      error: false,
+      errorMessage: '',
     };
     this.service = new AuthService();
-    this.handleFormSubimt = this.handleFormSubimt.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleFormSubimt(event) {
+  validaEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  
+  handleFormSubmit(event) {
     event.preventDefault();
     const {
       firstName,
@@ -34,30 +40,47 @@ class Form extends Component {
       gender,
       day,
       month,
-      year
+      year,
     } = this.state;
-    console.log(firstName,lastName,password,email,gender,day,month,year)
 
-    this.service.signup(firstName, lastName, password, email, gender, day, month, year)
-      .then(response => {
-        if(response){
-          this.setState({
-            userExists:true
+    if (this.validaEmail(email)) {
+      if ((firstName !== '' && lastName !== '' && password !== '' 
+      && email !== '' && gender !== '' && day !== '' && month !== '' && year !== '')) {
+        this.service.signup(firstName, lastName, password, email, gender, day, month, year)
+          .then(response => {
+            if (response.error === true) {
+              this.setState({
+                error: true,
+                errorMessage: 'Este usuário já existe no banco de dados!'
+              });
+            } else {
+              this.setState({
+                firstName: "",
+                lastName: "",
+                password: "",
+                email: "",
+                gender: "",
+                day: "",
+                month: "",
+                year: "",
+                error: false,
+                errorMessage: ''
+              });
+            }
           })
-        }
+          .catch(e => console.log('e'));
+      } else {
         this.setState({
-          firstName: "",
-          lastName: "",
-          password: "",
-          email: "",
-          gender: "",
-          day: "",
-          month: "",
-          year: "",
-          userExists:false
+          error: true,
+          errorMessage: 'Todos os dados precisam ser preenchidos!',
         });
-      })
-      .catch(error => console.log(error));
+      }        
+    } else {
+      this.setState({
+        error: true,
+        errorMessage: 'O email digitado é inválido!',
+      });
+    }
   }
 
   handleChange(event) {
@@ -65,15 +88,19 @@ class Form extends Component {
     this.setState({ [name]: value });
     switch(name){
       case 'email':
-        if(name.includes("@") && name.includes("."))
-        break;
+        if (name.includes("@") && name.includes("."))
+          break;
       default:
     }
   }
 
   render() {
+    let erro = '';
+    if (this.state.error === true) {
+      erro = this.state.errorMessage;
+    }
     return (
-      <form onSubmit={e => this.handleFormSubimt(e)} className="form">
+      <form onSubmit={e => this.handleFormSubmit(e)} className="form">
         <h1>Sign Up</h1>
         <Input
           type="text"
@@ -81,6 +108,7 @@ class Form extends Component {
           placeholder="Endereço de E-mail"
           change={e => this.handleChange(e)}
           value={this.state.email}
+          required='true'
         />
         <Input
           type="text"
@@ -88,6 +116,7 @@ class Form extends Component {
           placeholder="Nome"
           change={e => this.handleChange(e)}
           value={this.state.firstName}
+          required='true'
         />
         <Input
           type="text"
@@ -95,22 +124,25 @@ class Form extends Component {
           placeholder="Sobrenome"
           change={e => this.handleChange(e)}
           value={this.state.lastName}
+          required='true'
         />
         <Select
           name="gender"
-          placeholder="Gênero"
+          placeholder='Gênero'
           options={["Feminino", "Masculino", "Outro", "Prefiro não declarar"]}
           change={e => this.handleChange(e)}
           value={this.state.gender}
+          required='true'
         />
         <div>
           <Select
             name="day"
             placeholder="Dia"
-            options={[1,2,31]}
+            options={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]}
             change={e => this.handleChange(e)}
             value={this.state.day}
-          />
+            required='true'
+            />
           <Select
             name="month"
             placeholder="Mês"
@@ -130,16 +162,19 @@ class Form extends Component {
             ]}
             change={e => this.handleChange(e)}
             value={this.state.month}
-          />
+            required='true'
+            />
           <Select
             name="year"
             placeholder="Ano"
             options={[2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995]}
             change={e => this.handleChange(e)}
             value={this.state.year}
-          />
+            required='true'
+            />
         </div>
         <Input
+          required='true'
           type="password"
           name="password"
           placeholder="Senha"
@@ -147,6 +182,7 @@ class Form extends Component {
           value={this.state.password}
         />
         <button className="button-a ligth-green" type="submit">Submit</button>
+        <label className='mensagem-erro'>{erro}</label>
       </form>
     );
   }
