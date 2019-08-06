@@ -7,6 +7,7 @@ nav {
   justify-content: center;
   background-color: #4bbf5b;
   padding: 10px 0;
+  z-index: 2;
 }
 
 nav img {

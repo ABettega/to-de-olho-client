@@ -3,12 +3,6 @@
     width: 100%;
     display: flex;
     overflow-x: auto;
-  }
-
-  .card-slider {
-    flex-shrink: 0;
-    margin: 0 2px;
-    width: 70%;
-    height: 300px;
+    padding-bottom: 25px;
   }
 }
