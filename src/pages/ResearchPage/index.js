@@ -12,12 +12,19 @@ class ResearchPage extends Component {
     this.state = {
       search: "",
       deputados: [],
-      senadores: []
+      senadores: [],
+      loginMessage: this.props.location.state.loginMessage
     };
+
     this.service = new AuthService();
   }
 
   componentDidMount() {
+    window.setTimeout(() => {
+      this.setState({
+        loginMessage: ''
+      })
+    }, 3000);
     this.service
       .deputados()
       .then(response => {
@@ -53,6 +60,7 @@ class ResearchPage extends Component {
   render() {
     return (
       <>
+        <label>{this.state.loginMessage}</label>
         <input
           name="name"
           type="text"

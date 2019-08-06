@@ -14,7 +14,7 @@ const Navbar = () => {
                 src="/images/user.png"
                 alt="Imagem para entrar"
               />
-              Entrar
+              Login
             </div>
           </Link>
         </li>

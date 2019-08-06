@@ -66,9 +66,13 @@ class Form extends Component {
                 error: false,
                 errorMessage: ''
               });
+              this.props.history.push({
+                pathname: '/pesquisar',
+                state: {loginMessage: 'Obrigado por fazer o registro!'}
+              });
             }
           })
-          .catch(e => console.log('e'));
+          .catch(e => console.log(e));
       } else {
         this.setState({
           error: true,
