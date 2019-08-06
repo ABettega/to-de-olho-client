@@ -3,18 +3,25 @@ import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
-
+import Snackbar from 'node-snackbar';
 
 class ResearchPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      search: "",
-      deputados: [],
-      senadores: [],
-      loginMessage: this.props.location.state.loginMessage
-    };
+    if (this.props.location.state)
+      this.state = {
+        search: "",
+        deputados: [],
+        senadores: [],
+        loginMessage: this.props.location.state.loginMessage
+      };
+    else
+      this.state = {
+        search: "",
+        deputados: [],
+        senadores: [],
+      };
 
     this.service = new AuthService();
   }
@@ -58,9 +65,20 @@ class ResearchPage extends Component {
  }
 
   render() {
+    if (this.state.loginMessage !== undefined) {
+      Snackbar.show({
+        pos: 'top-left',
+        text: this.state.loginMessage,
+        showAction: false,
+        backgroundColor: '#4BBF5B',
+        textColor: '#FFF',
+        width: '175px',
+        customClass: 'padding-left: 10px'
+      })
+    }
     return (
       <>
-        <label>{this.state.loginMessage}</label>
+        {/* <label>{this.state.loginMessage}</label> */}
         <input
           name="name"
           type="text"
