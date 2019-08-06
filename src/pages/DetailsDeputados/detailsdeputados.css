@@ -1,0 +1,34 @@
+.politician-info-container {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px;
+}
+
+.politician-info-container img {
+  height: fit-content;
+  width: 130px;
+}
+
+.politician-info {
+  margin: 10px;
+  font-size: 0.8rem;
+}
+
+.politician-info p{
+  margin-bottom: 10px;
+}
+
+.legislaturas-ul {
+  list-style: none;
+  margin: 5px;
+}
+
+.loading-icon-container {
+  width: 100vw;
+  height: 85vh;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
