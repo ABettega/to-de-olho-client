@@ -3,7 +3,7 @@ import "./select.css";
 
 const Select = props => {
   return (
-    <select name={props.name} onChange={e => props.change(e)}>
+    <select required={props.required} name={props.name} onChange={e => props.change(e)}>
       <option key={props.placeholder} value="">
         {props.placeholder}
       </option>

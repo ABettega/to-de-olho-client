@@ -11,11 +11,11 @@ class LoginForm extends Component {
       email: "",
     };
     this.service = new AuthService();
-    this.handleFormSubimt = this.handleFormSubimt.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleFormSubimt(event) {
+  handleFormSubmit(event) {
     event.preventDefault();
     const {
       password,
@@ -24,6 +24,7 @@ class LoginForm extends Component {
 
     this.service.login( email, password)
       .then(response => {
+        console.log(response)
         if(response){
           this.setState({
             userExists:true
@@ -44,9 +45,10 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form onSubmit={e => this.handleFormSubimt(e)} className="form">
+      <form onSubmit={e => this.handleFormSubmit(e)} className="form">
         <h1>Login</h1>
         <Input
+          required='true'
           type="text"
           name="email"
           placeholder="Endereço de E-mail"
@@ -54,6 +56,7 @@ class LoginForm extends Component {
           value={this.state.email}
         />
         <Input
+          required='true'
           type="password"
           name="password"
           placeholder="Senha"

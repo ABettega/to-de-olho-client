@@ -7,7 +7,6 @@ import ResearchPage from "./pages/ResearchPage"
 import LoginForm from "./pages/Login"
 import { Switch, Route } from 'react-router-dom';
 
-
 class App extends Component {
   render() {
     return (
