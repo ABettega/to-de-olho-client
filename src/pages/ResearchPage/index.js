@@ -4,7 +4,6 @@ import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import Snackbar from "node-snackbar";
 import "./researchpage.css";
-import Snackbar from 'node-snackbar';
 
 class ResearchPage extends Component {
   constructor(props) {
