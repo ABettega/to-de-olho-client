@@ -31,6 +31,18 @@ class AuthService {
         username: email,
         password
       })
+      .then(response => { return response.data })
+      .catch(err => console.log(err));
+  }
+
+  loggedin = () => {
+    return this.service.get('/auth/loggedin')
+    .then(response => response.data)
+  }
+  
+  logout() {
+    return this.service
+      .get('/auth/logout')
       .then(response => response.data)
       .catch(err => console.log(err));
   }

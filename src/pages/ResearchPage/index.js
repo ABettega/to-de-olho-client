@@ -3,7 +3,6 @@ import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
-import Snackbar from 'node-snackbar';
 
 class ResearchPage extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class ResearchPage extends Component {
         search: "",
         deputados: [],
         senadores: [],
-        loginMessage: this.props.location.state.loginMessage
+        loginMessage: ''
       };
     else
       this.state = {
@@ -31,7 +30,7 @@ class ResearchPage extends Component {
       this.setState({
         loginMessage: ''
       })
-    }, 3000);
+    }, 5000);
     this.service
       .deputados()
       .then(response => {
@@ -47,8 +46,8 @@ class ResearchPage extends Component {
           senadores: [...response]
         })
       }
-      )
-      .catch(err => console.log(err));
+    )
+    .catch(err => console.log(err));
   }
 
   handleChange(event) {
@@ -65,17 +64,6 @@ class ResearchPage extends Component {
  }
 
   render() {
-    if (this.state.loginMessage !== undefined) {
-      Snackbar.show({
-        pos: 'top-left',
-        text: this.state.loginMessage,
-        showAction: false,
-        backgroundColor: '#4BBF5B',
-        textColor: '#FFF',
-        width: '175px',
-        customClass: 'padding-left: 10px'
-      })
-    }
     return (
       <>
         {/* <label>{this.state.loginMessage}</label> */}
