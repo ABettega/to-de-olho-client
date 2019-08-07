@@ -1,0 +1,77 @@
+.politician-info-container {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px;
+}
+
+.politician-info-container img {
+  height: fit-content;
+  width: 130px;
+}
+
+.politician-info {
+  margin: 10px;
+  font-size: 0.8rem;
+}
+
+.politician-info p{
+  margin-bottom: 10px;
+}
+
+.legislaturas-ul {
+  list-style: none;
+  margin: 5px;
+}
+
+.loading-icon-container {
+  width: 100vw;
+  height: 85vh;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-icon-historical {
+  width: 100vw;
+  height: fit-content;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.legis-text {
+  font-size: 0.85rem;
+  color: #777;
+  border-bottom: 1px solid #777;
+}
+
+.presenca-sessoes-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.info-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.charts-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.legis-container {
+  width: fit-content;
+  margin-bottom: 10px;
+}

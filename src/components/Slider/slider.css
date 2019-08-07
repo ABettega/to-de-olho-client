@@ -1,8 +1,15 @@
-@media (max-width: 576px) {
+.slider {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+  padding: 25px 7px;
+}
+
+@media (min-width: 912px) {
   .slider {
-    width: 100%;
     display: flex;
-    overflow-x: auto;
-    padding-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
