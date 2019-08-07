@@ -44,8 +44,9 @@
 }
 
 .legis-text {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   color: #777;
+  border-bottom: 1px solid #777;
 }
 
 .presenca-sessoes-container {
@@ -53,12 +54,24 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.info-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
 }
 
 .charts-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.legis-container {
+  width: fit-content;
+  margin-bottom: 10px;
 }
