@@ -35,19 +35,35 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-  deputados() {
+  deputadosatuais() {
     return this.service
       .get("/deputados/atuais")
       .then(response => response.data)
       .catch(err => console.log(err));
   }
 
-  senadores() {
+  deputadostodos() {
+    return this.service
+      .get("/deputados/")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  senadorestodos() {
+    return this.service
+      .get("/senadores/historico")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  senadoresatuais() {
     return this.service
       .get("/senadores")
       .then(response => response.data)
       .catch(err => console.log(err));
   }
+
+
 
   detailsdeputados(id) {
     return this.service

@@ -58,11 +58,11 @@
 @media (min-width: 576px) {
   .card-slider {
       margin-bottom: 50px;
+      width: 255px;
+  }
+  .partido{
+      width: 100px;
+      height: 100px;;
   }
 }
 
-@media (min-width: 992px) {
-    .card-slider {
-        width: 225px;
-    }
- }

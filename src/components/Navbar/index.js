@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav>
       <ul className="nav-ul">
         <li>
-          <Link className="nav-a" to="/entrar">
+          <Link className="nav-a" to="/login  ">
             <div>
               <img
                 id="entrar"
