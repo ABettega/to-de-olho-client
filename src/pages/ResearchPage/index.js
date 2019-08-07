@@ -3,6 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
+import Snackbar from 'node-snackbar';
 
 class ResearchPage extends Component {
   constructor(props) {

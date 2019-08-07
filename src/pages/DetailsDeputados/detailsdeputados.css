@@ -32,3 +32,33 @@
   justify-content: center;
   align-items: center;
 }
+
+.loading-icon-historical {
+  width: 100vw;
+  height: fit-content;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.legis-text {
+  font-size: 0.7rem;
+  color: #777;
+}
+
+.presenca-sessoes-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.charts-container {
+  display: flex;
+  flex-flow: row wrap;
+}
