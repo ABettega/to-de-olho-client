@@ -75,13 +75,23 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-
-
   detailsdeputados(id) {
     return this.service
       .get(`/deputados/sessoes/${id}`)
       .then(response => response.data)
       .catch(err => console.log(err));
+  }
+
+  addpolitician(id,politico){
+    return this.service.post("/dashboard/add-politician",{id,politico})
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+
+  deletepolitician(id,politico){
+    return this.service.post("/dashboard/delete-politician", {id,politico})
+    .then(response => console.log(response.data))
+    .catch(err => console.log(err));
   }
 }
 

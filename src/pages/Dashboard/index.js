@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AuthService from "../../components/Auth/auth-services";
 import './dashboard.css'
 
 class Dashboard extends Component {
@@ -6,10 +7,42 @@ class Dashboard extends Component {
     console.log(props)
     super(props);
     this.state = {
-        userphoto: "",
         username: "",
-        politicos:[1,2,3]
+        depFavoritos:[],
+        senFavoritos:[],
+        deputadostodos:[],
+        senadorestodos:[]
     };
+    this.service = new AuthService();
+  }
+  
+  componentDidMount(){
+    this.service.loggedin()
+    .then(response =>{
+      let {firstName,depFavoritos, senFavoritos} = response
+      console.log(response)
+      this.setState({
+        username: firstName,
+        depFavoritos: depFavoritos,
+        senFavoritos: senFavoritos
+      })
+    })
+    this.service
+    .deputadostodos()
+    .then(response => {
+      this.setState({
+        deputadostodos: [...response]
+      });
+    })
+    .catch(err => console.log(err));
+    
+  this.service.senadorestodos()
+    .then(response => {
+      this.setState({
+        senadorestodos: [...response]
+      });
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -22,12 +55,17 @@ class Dashboard extends Component {
         </div>
       </div>
       <div>
-       {this.state.politicos.map(politico =>{
+        {console.log(this.state.senFavoritos)}
+      {this.state.senadorestodos
+                .filter(senador => {
+                  return this.state.senFavoritos.includes(String(senador.IdentificacaoParlamentar.CodigoParlamentar))})
+                .map(senador =>{
+                  console.log(senador)
           return (
           <div key={Math.random()} className="card-politician-horizontal"style={{backgroundImage: "url('')"}}>
               <div className="photo-politician" style={{backgroundImage: 'url("https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg")' }}> </div>
               <div className="politician-information"> 
-                  <p>Nome do Cara</p>
+                  <p>{senador.IdentificacaoParlamentar.NomeParlamentar}</p>
                   <input className="add-politician" type="checkbox"></input>
               </div>
           </div>)

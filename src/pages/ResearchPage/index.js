@@ -116,7 +116,7 @@ class ResearchPage extends Component {
         />
         <div className="center">
           <div className="half-page">
-            <img className="congresso-img" src="./images/senado.png" />
+            <img className="congresso-img" src="/images/senado.png" />
             <Slider>
               {this.state.researchsenadores
                 .filter(senador =>
@@ -127,8 +127,8 @@ class ResearchPage extends Component {
                 .map(senador => {
                   return (
                     <CardPolitico
-                      key={senador._id}
-                      id={senador._id}
+                      key={senador.IdentificacaoParlamentar.CodigoParlamentar}
+                      id={senador.IdentificacaoParlamentar.CodigoParlamentar}
                       politician="/senador/"
                       politicianName={this.titleCase(
                         senador.IdentificacaoParlamentar.NomeParlamentar
@@ -143,7 +143,7 @@ class ResearchPage extends Component {
             </Slider>
           </div>
           <div className="half-page">
-            <img className="congresso-img" src="./images/deputados.png" />
+            <img className="congresso-img" src="/images/deputados.png" />
             <Slider>
               {this.state.researchdeputados
                 .filter(deputado =>
