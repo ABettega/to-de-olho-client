@@ -4,7 +4,7 @@ import { compose } from "@material-ui/system";
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: "http://localhost:5000",
+      baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true
     });
     this.service = service;
@@ -91,9 +91,16 @@ class AuthService {
 
   deletepolitician(id,politico){
     return this.service.post("/dashboard/delete-politician", {id,politico})
-    .then(response => console.log(response.data))
+    .then(response => response.data)
     .catch(err => console.log(err));
   }
+
+  getFavorites(email) {
+    return this.service.get("/dashboard/getFavorites", { email })
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+  
   sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
     console.log(`deputados/sessoes/info/${legis}/${situacao}`);
     return this.service

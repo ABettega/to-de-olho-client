@@ -35,9 +35,9 @@ class DetailsDeputados extends Component {
   }
   
   componentDidMount() {
-    axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}/atual`)
+    axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/atual`)
     .then(politicianAtual => {
-      if (politicianAtual.data) {
+      if (politicianAtual.data.nomeDeputado !== undefined) {
         const { sessoes, votos, nomeDeputado, partido, uf, foto, legislatura } = politicianAtual.data;
         this.setState({
           politicianName: this.toTitleCase(nomeDeputado),
@@ -104,7 +104,7 @@ class DetailsDeputados extends Component {
     })
     .catch(e => console.log(e));
     
-    axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}/historico`)
+    axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/historico`)
     .then(politicianHist => {
       const { legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto } = politicianHist.data;
       this.setState({

@@ -10,7 +10,6 @@ import Draggable from 'react-draggable';
 import LoadingIcon from "../../components/LoadingIcon";
 import './MessageAttach.css';
 
-
 function PaperComponent(props) {
   return (
     <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
