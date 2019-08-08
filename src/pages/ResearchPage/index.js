@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
-import Snackbar from "node-snackbar";
 import "./researchpage.css";
 
 class ResearchPage extends Component {
@@ -72,12 +71,6 @@ class ResearchPage extends Component {
   }
 
   chooseAllorSome() {
-    // window.setTimeout(() => {
-    //   this.setState({
-    //     loginMessage: ""
-    //   });
-    // }, 3000);
-    console.log("IAM INSIDE CHOOSE ALLOR SOME")
     if (this.state.search === "") {
       let copyDeputadosAtuais = [...this.state.deputadosatuais]
       let copySenadoresAtuais = [...this.state.senadoresatuais]
@@ -96,12 +89,10 @@ class ResearchPage extends Component {
   }
 
   async handleChange(event) {
-    console.log(this)
     const { value } = event.target;
     await this.setState({ search: value });
     await this.chooseAllorSome()
   }
-
 
   titleCase(str) {
     let splitStr = str.toLowerCase().split(" ");
@@ -113,18 +104,6 @@ class ResearchPage extends Component {
   }
 
   render() {
-    console.log(this.state)
-    if (this.state.loginMessage !== undefined) {
-      Snackbar.show({
-        pos: "top-left",
-        text: this.state.loginMessage,
-        showAction: false,
-        backgroundColor: "#4BBF5B",
-        textColor: "#FFF",
-        width: "175px",
-        customClass: "padding-left: 10px"
-      });
-    }
     return (
       <>
         <input

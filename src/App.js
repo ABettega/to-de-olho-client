@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard"
 import LoginForm from "./pages/Login"
 import { Switch, Route } from 'react-router-dom';
 import AuthService from './components/Auth/auth-services';
+import ProtectedRoute from './components/Auth/protected-route';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class App extends Component {
 
     this.state = { loggedInUser: null };
     this.service = new AuthService();
+  }
+
+  componentDidMount() {
+    this.fetchUser();
   }
 
   fetchUser(){
@@ -54,7 +59,7 @@ class App extends Component {
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
-          <Route path='/dashboard/' render={() => <Dashboard/>}></Route>
+          <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
       </Fragment>
     );
