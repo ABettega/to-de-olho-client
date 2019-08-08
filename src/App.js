@@ -8,6 +8,7 @@ import DetailsDeputados from "./pages/DetailsDeputados"
 import LoginForm from "./pages/Login"
 import { Switch, Route } from 'react-router-dom';
 import AuthService from './components/Auth/auth-services';
+import ProtectedRoute from './components/Auth/protected-route';
 
 class App extends Component {
   constructor(props) {
