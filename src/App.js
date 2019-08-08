@@ -59,7 +59,7 @@ class App extends Component {
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
-          <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
+          <ProtectedRoute path='/dashboard' getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
       </Fragment>
     );
