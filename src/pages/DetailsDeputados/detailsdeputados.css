@@ -75,3 +75,7 @@
   width: fit-content;
   margin-bottom: 10px;
 }
+
+.last {
+  padding-bottom: 90px;
+}
