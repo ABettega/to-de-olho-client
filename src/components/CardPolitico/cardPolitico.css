@@ -9,6 +9,12 @@
     transform: scale(1);
   }
 }
+
+.add-poli{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .card {
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,12 +25,17 @@
   align-items: flex-end;
 }
 
-.card-slider {
-  flex-shrink: 0;
-  margin: 0 8px;
+.div-maior{
   width: 40%;
   height: 400px;
+  margin: 0 8px;
   box-shadow: 0px 0px 20px 1px rgba(189, 189, 189, 0.47);
+  flex-shrink: 0;
+  position: relative;
+
+}
+.card-slider {
+  width: 100%;
   text-decoration: none;
   text-align: center;
   color: black;
@@ -56,7 +67,7 @@
 }
 
 @media (min-width: 576px) {
-  .card-slider {
+  .div-maior {
       margin-bottom: 50px;
       width: 255px;
   }
