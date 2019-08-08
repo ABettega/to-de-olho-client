@@ -3,9 +3,10 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Main from "./pages/MainPage/";
 import SignUpForm from "./pages/SignUpForm";
-import ResearchPage from "./pages/ResearchPage"
-import DetailsDeputados from "./pages/DetailsDeputados"
-import LoginForm from "./pages/Login"
+import ResearchPage from "./pages/ResearchPage";
+import DetailsDeputados from "./pages/DetailsDeputados";
+import DetailsSenadores from "./pages/DetailsSenadores";
+import LoginForm from "./pages/Login";
 import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
+          <Route path='/senador/:id' render={(props) => <DetailsSenadores {...props} />}></Route>
         </Switch>
       </Fragment>
     );

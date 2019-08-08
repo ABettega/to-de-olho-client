@@ -5,7 +5,7 @@
 }
 
 .politician-info-container img {
-  height: fit-content;
+  height: 180px;
   width: 130px;
 }
 
@@ -16,10 +16,6 @@
 
 .politician-info p{
   margin-bottom: 10px;
-}
-
-.info-container {
-  padding: 20px;
 }
 
 .legislaturas-ul {
@@ -64,6 +60,4 @@
 .charts-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
 }
