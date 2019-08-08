@@ -265,9 +265,11 @@ class DetailsSenadores extends Component {
           {this.state.historico ?
             <div className="info-container">
               <div className='legis-container'>
+
               {
-                (this.state.atual.mandatos.dataFim === undefined) ?
-                <p></p> :
+                (this.state.historico.mandatos.dataFim === undefined) ?
+                <p className="legis-text"><span>Histórico de legislaturas: Primeira legislatura</span>
+                <br></br></p> :
                 <p className="legis-text"><span>Histórico de legislaturas: </span><br></br>
                 {Object.values(this.state.historico.mandatos).map(legis => {return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `})} {this.state.historico.mandatos.dataInicio.slice(-1)[0].slice(0, 4)} - {this.state.historico.mandatos.dataFim.slice(-1)[0].slice(0, 4)}</p>
               }
