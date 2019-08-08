@@ -10,6 +10,7 @@ import LoginForm from "./pages/Login"
 import { Switch, Route } from 'react-router-dom';
 import AuthService from './components/Auth/auth-services';
 import ProtectedRoute from './components/Auth/protected-route';
+import VotacaoDeputados from './pages/VotacaoDeputados';
 
 class App extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class App extends Component {
           <Route exact path='/registrar' render={(props) => <SignUpForm {...props} getUser={this.getTheUser} />}></Route>
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
+          <Route exact path='/deputado/votacao/:idVotacao' render={(props) => <VotacaoDeputados {...props} />} />
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
           <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
