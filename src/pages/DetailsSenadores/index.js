@@ -289,11 +289,20 @@ class DetailsSenadores extends Component {
               <div className='legis-container'>
 
               {
-                (this.state.historico.mandatos.dataFim === undefined) ?
+                (this.state.historico.mandatos.dataFim === undefined || this.state.historico.mandatos.dataFim.length < 1) ?
                 <p className="legis-text"><span>Histórico de legislaturas: Primeira legislatura</span>
                 <br></br></p> :
                 <p className="legis-text"><span>Histórico de legislaturas: </span><br></br>
-                {Object.values(this.state.historico.mandatos).map(legis => {return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `})} {this.state.historico.mandatos.dataInicio.slice(-1)[0].slice(0, 4)} - {this.state.historico.mandatos.dataFim.slice(-1)[0].slice(0, 4)}</p>
+                {Object.values(this.state.historico.mandatos).map(legis => {
+                  console.log(typeof legis[0], typeof legis[1])
+                  if (legis[0] !== null && typeof legis[1] === 'string') {
+                    return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `
+                  }
+                })} {this.state.historico.mandatos.dataInicio.slice(-1)[0].slice(0, 4)} - 
+                { typeof this.state.historico.mandatos.dataFim.slice(-1)[0] === 'string' ?
+                  this.state.historico.mandatos.dataFim.slice(-1)[0].slice(0, 4) :
+                  ''
+                }</p>
               }
               </div>
               <div className="charts-container">

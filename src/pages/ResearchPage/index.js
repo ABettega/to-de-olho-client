@@ -4,6 +4,7 @@ import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
 import Snackbar from 'node-snackbar';
+import { debounce } from 'lodash';
 
 class ResearchPage extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class ResearchPage extends Component {
         search: "",
         deputados: [],
         senadores: [],
+        filterDeputados: [],
+        filterSenadores: [],
         loginMessage: this.props.location.state.loginMessage
       };
     else
@@ -21,6 +24,8 @@ class ResearchPage extends Component {
         search: "",
         deputados: [],
         senadores: [],
+        filterDeputados: [],
+        filterSenadores: [],
       };
 
     this.service = new AuthService();
@@ -37,7 +42,8 @@ class ResearchPage extends Component {
       .then(response => {
         console.log(response);
         this.setState({
-          deputados: [...response]
+          deputados: [...response],
+          filterDeputados: [...response]
         });
       })
       .catch(err => console.log(err));
@@ -45,15 +51,32 @@ class ResearchPage extends Component {
       .senadores()
       .then(response => {
         this.setState({
-          senadores: [...response]
+          senadores: [...response],
+          filterSenadores: [...response],
         });
       })
       .catch(err => console.log(err));
   }
 
+  setFiltered = debounce(query => {
+    this.setState({
+      filterDeputados: this.state.deputados.filter((deputado) =>
+        deputado.nomeDeputado
+          .toUpperCase()
+          .includes(query.toUpperCase())
+      ),
+      filterSenadores: this.state.senadores.filter((senador) =>
+        senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
+          query.toUpperCase()
+        )
+      )
+    });
+  }, 500);
+
   handleChange(event) {
     const { value } = event.target;
-    this.setState({ search: value });
+    this.setFiltered(value);
+    this.setState({search: value});
   }
 
   titleCase(str) {
@@ -92,12 +115,7 @@ class ResearchPage extends Component {
           <div className="half-page">
             <img className="congresso-img" src="./images/senado.png" />
             <Slider>
-              {this.state.senadores
-                .filter(senador =>
-                  senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
-                    this.state.search.toUpperCase()
-                  )
-                )
+              {this.state.filterSenadores
                 .map(senador => {
                   return (
                     <CardPolitico
@@ -119,12 +137,12 @@ class ResearchPage extends Component {
           <div className="half-page">
           <img className="congresso-img" src="./images/deputados.png" />
           <Slider>
-            {this.state.deputados
-              .filter(deputado =>
-                deputado.nomeDeputado
-                  .toUpperCase()
-                  .includes(this.state.search.toUpperCase())
-              )
+            {this.state.filterDeputados
+              // .filter(deputado =>
+              //   deputado.nomeDeputado
+              //     .toUpperCase()
+              //     .includes(this.state.search.toUpperCase())
+              // )
               .map(deputado => {
                 return (
                   <CardPolitico
