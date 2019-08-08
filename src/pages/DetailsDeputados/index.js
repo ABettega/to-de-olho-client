@@ -12,7 +12,8 @@ class DetailsDeputados extends Component {
     this.ctx = React.createRef();
     this.state = {
       showVotes: false,
-      messageBox: 'oi',
+      messageBox: '',
+      sessoesPresenca: '',
     }
     this.service = new AuthService();
     
@@ -157,32 +158,120 @@ class DetailsDeputados extends Component {
   handleChartClick(dp, legis) {
     switch(dp.subLabel) {
       case 'Votos':
-        console.log('Votos');
+        if(legis === 'atual') {
+          this.service.sessoesPresentesDeputados('atual', 'votos', this.state.politicianName, [this.state.atual.legislatura])
+          .then(res => {
+            console.log(res);
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar votou:`,
+              sessoesPresenca: res,  
+            });
+          });
+        } else if (legis === 'historico') {
+          this.service.sessoesPresentesDeputados('historico', 'votos', this.state.politicianName, this.state.historico.legislaturas)
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar votou:`,
+              sessoesPresenca: res,  
+            });
+          });
+        }
         break;
       case 'Não registrou voto':
-        console.log('Não registrou voto');
-        break;   
+        if(legis === 'atual') {
+          this.service.sessoesPresentesDeputados('atual', 'naovot', this.state.politicianName, [this.state.atual.legislatura])
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar não votou:`,
+              sessoesPresenca: res,  
+            });
+          });
+        } else if (legis === 'historico') {
+          this.service.sessoesPresentesDeputados('historico', 'naovot', this.state.politicianName, this.state.historico.legislaturas)
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar não votou:`,
+              sessoesPresenca: res,  
+            });
+          });
+        }
+        break;  
       case 'Obstrução':
-        console.log('Obstruiu');
+        if(legis === 'atual') {
+          this.service.sessoesPresentesDeputados('atual', 'obstrucao', this.state.politicianName, [this.state.atual.legislatura])
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar obstruiu:`,
+              sessoesPresenca: res,  
+            });
+          });
+        } else if (legis === 'historico') {
+          this.service.sessoesPresentesDeputados('historico', 'obstrucao', this.state.politicianName, this.state.historico.legislaturas)
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de votações em que o parlamentar obstruiu:`,
+              sessoesPresenca: res,  
+            });
+          });
+        }
         break;
       case 'Presença':
-        this.service.sessoesPresentesDeputados('atual', 'presenca', this.state.politicianName, [this.state.atual.legislatura]).then(res => console.log(res));
+        if(legis === 'atual') {
+          this.service.sessoesPresentesDeputados('atual', 'presenca', this.state.politicianName, [this.state.atual.legislatura])
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de sessões em que o parlamentar esteve presente:`,
+              sessoesPresenca: res,  
+            });
+          });
+        } else if (legis === 'historico') {
+          this.service.sessoesPresentesDeputados('historico', 'presenca', this.state.politicianName, this.state.historico.legislaturas)
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de sessões em que o parlamentar esteve presente:`,
+              sessoesPresenca: res,  
+            });
+          });
+        }
         break;
       case 'Ausência':
-        // this.service.sessoesPresentesDeputados('atual', 'ausencia', this.state.politicianName, [this.state.atual.legislatura]).then(res => console.log(res));
+        if(legis === 'atual') {
+          this.service.sessoesPresentesDeputados('atual', 'ausencia', this.state.politicianName, [this.state.atual.legislatura])
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de sessões em que o parlamentar esteve ausente:`,
+              sessoesPresenca: res,  
+            });
+          });
+        } else if (legis === 'historico') {
+          this.service.sessoesPresentesDeputados('historico', 'ausencia', this.state.politicianName, this.state.historico.legislaturas)
+          .then(res => {
+            this.setState({
+              messageBox: `Lista de sessões em que o parlamentar esteve ausente:`,
+              sessoesPresenca: res,  
+            });
+          });
+        }
         break;
     }
-    // this.setState({
-    //   showVotes: !this.state.showVotes,
-    //   messageBox: dp,
-    // })
+    this.setState({
+      showVotes: !this.state.showVotes,
+    });
+  }
+
+  handleCancelMessageBox() {
+    this.setState({
+      showVotes: !this.state.showVotes,
+      messageBox: '',
+      sessoesPresenca: '',
+    })
   }
   
   render() {
     const {atual, historico} = this.state;
     return (
       <Fragment>
-        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title={this.state.messageBox} />}
+        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title={this.state.messageBox} sessoesPresenca={this.state.sessoesPresenca} handleCancelMessageBox={() => this.handleCancelMessageBox()}/>}
         {(this.state.atual || this.state.historico) ?
           <div>
             <div className="politician-info-container">
@@ -202,6 +291,7 @@ class DetailsDeputados extends Component {
                 <div className="presenca-sessoes-container">
                   <p>Presença em sessões</p>
                   <RadialChart
+                  className="radialchart"
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.sessoes.percentualPresenca}
                   data={atual.charts.sessoes} 

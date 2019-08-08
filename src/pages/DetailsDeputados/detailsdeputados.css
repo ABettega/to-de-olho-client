@@ -43,6 +43,16 @@
   align-items: center;
 }
 
+.loading-icon-container-msg {
+  width: 300px;
+  height: 150px;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .legis-text {
   font-size: 0.85rem;
   color: #777;
@@ -78,4 +88,8 @@
 
 .last {
   padding-bottom: 90px;
+}
+
+.rv-xy-plot__series:hover {
+  cursor: pointer;
 }
