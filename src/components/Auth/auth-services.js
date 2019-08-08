@@ -1,4 +1,5 @@
 import axios from "axios";
+import { compose } from "@material-ui/system";
 
 class AuthService {
   constructor() {
@@ -91,6 +92,12 @@ class AuthService {
   deletepolitician(id,politico){
     return this.service.post("/dashboard/delete-politician", {id,politico})
     .then(response => console.log(response.data))
+    .catch(err => console.log(err));
+  }
+  sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
+    return this.service
+    .post(`deputados/sessoes/info/${legis}/${situacao}`, {nomeDeputado, legislaturas})
+    .then(response => response.data)
     .catch(err => console.log(err));
   }
 }
