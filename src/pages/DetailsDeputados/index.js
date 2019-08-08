@@ -3,7 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import './detailsdeputados.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
-import RadialChart from '../../components/Charts/RadialChart';
+import RadialChart from '../../components/Charts/RadialChartSenadores';
 import MessageAttach from '../../components/MessageBox/MessageAttach';
 
 class DetailsDeputados extends Component {

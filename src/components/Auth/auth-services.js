@@ -65,7 +65,7 @@ class AuthService {
   senadorestodos() {
     return this.service
       .get("/senadores/historico")
-      .then(response => response.data)
+      .then(response => response.data.todosSenadores)
       .catch(err => console.log(err));
   }
 
