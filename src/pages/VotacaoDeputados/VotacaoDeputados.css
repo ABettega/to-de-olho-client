@@ -1,0 +1,9 @@
+.strong {
+  font-weight: bold;
+}
+
+.voto-link-list {
+  display: block;
+  text-decoration: none;
+  color: black;
+}

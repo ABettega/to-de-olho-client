@@ -9,7 +9,7 @@ class ResearchPage extends Component {
   constructor(props) {
     super(props);
 
-    if (this.props.location.state){
+    if (this.props.location.state) {
       this.state = {
         search: "",
         deputados: [],
@@ -36,7 +36,21 @@ class ResearchPage extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  checkAuto() {
+    if (this.props.user) {
+      this.service.getFavorites(this.props.user.email)
+        .then(ret => {
+          this.setState({
+            favDep: ret.depFavoritos,
+            favSen: ret.senFavoritos
+          })
+        })
+        .catch(err => console.log(err))
+    }
+  }
+
   componentDidMount() {
+    this.checkAuto();
     this.service.deputadosatuais().then(response => {
       this.setState({
         deputadosAtuais: [...response],
@@ -132,6 +146,8 @@ class ResearchPage extends Component {
                       backImage={
                         senador.IdentificacaoParlamentar.UrlFotoParlamentar
                       }
+                      user={this.props.user}
+                      fav={this.state.favSen}
                     />
                   );
                 })}
@@ -151,6 +167,8 @@ class ResearchPage extends Component {
                     backImage={
                       senador.IdentificacaoParlamentar.UrlFotoParlamentar
                     }
+                    user={this.props.user}
+                      fav={this.state.favDep}
                   />
                 );
               })}
@@ -173,6 +191,8 @@ class ResearchPage extends Component {
                     politicianName={this.titleCase(deputado.nomeDeputado)}
                     uf={deputado.siglaUf}
                     backImage={deputado.urlFoto}
+                    user={this.props.user}
+                    fav={this.state.favDep}
                   />
                 );
               })}
@@ -189,6 +209,8 @@ class ResearchPage extends Component {
                     politicianName={this.titleCase(deputado.nomeDeputado)}
                     uf={deputado.siglaUf}
                     backImage={deputado.urlFoto}
+                    user={this.props.user}
+                    fav={this.state.favDep}
                   />
                 );
               })}
