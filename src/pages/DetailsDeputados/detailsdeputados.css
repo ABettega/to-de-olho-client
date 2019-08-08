@@ -30,7 +30,6 @@
 .loading-icon-container {
   width: 100vw;
   height: 85vh;
-  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

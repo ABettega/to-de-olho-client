@@ -53,58 +53,69 @@ class DetailsSenadores extends Component {
             mandatos,
             charts: {
               sessoes: [
-              { 
-                angle: res.data.faltasSenador, 
-                label: '' + res.data.faltasSenador, 
-                subLabel:'Ausência',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.diasDeLicenca, 
-                label: '' + res.data.diasDeLicenca, 
-                subLabel:'Licença',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.diasEmAP, 
-                label: '' + res.data.diasEmAP, 
-                subLabel:'Atividades Culturais',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.diasEmMissao, 
-                label: '' + res.data.diasEmMissao, 
-                subLabel:'Dias em Missão',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.naoVotou, 
-                label: '' + res.data.naoVotou, 
-                subLabel:'Presente mas não votou',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.obstrucoes, 
-                label: '' + res.data.obstrucoes, 
-                subLabel:'Obstruções',
-                style: {
-                  fill: 'rgba(0, 0, 0, 0)',
-                }
-              },
-              { 
-                angle: res.data.totalDeVotos, 
-                label: '' + res.data.totalDeVotos, 
-                subLabel:'Presença *'},
+                { 
+                  angle: res.data.faltasSenador, 
+                  label: '' + res.data.faltasSenador, 
+                  subLabel:'Ausência',
+                  style: {
+                    fill: '#AB4263',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.diasDeLicenca, 
+                  label: '' + res.data.diasDeLicenca, 
+                  subLabel:'Licença',
+                  style: {
+                    fill: '#66AB6D',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.diasEmAP, 
+                  label: '' + res.data.diasEmAP, 
+                  subLabel:'Atividades Culturais',
+                  style: {
+                    fill: '#617888',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.diasEmMissao, 
+                  label: '' + res.data.diasEmMissao, 
+                  subLabel:'Dias em Missão',
+                  style: {
+                    fill: '#FFA3C9',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.naoVotou, 
+                  label: '' + res.data.naoVotou, 
+                  subLabel:'Presente mas não votou',
+                  style: {
+                    fill: '#6EBCCC',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.obstrucoes, 
+                  label: '' + res.data.obstrucoes, 
+                  subLabel:'Obstruções',
+                  style: {
+                    fill: '#FAC438',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
+                { 
+                  angle: res.data.totalDeVotos, 
+                  label: '' + res.data.totalDeVotos, 
+                  subLabel:'Presença',
+                  style: {
+                    fill: '#876DB3',
+                    stroke: 'rgba(0,0,0,0)',
+                  }
+                },
               ]},
           },
         });
@@ -158,7 +169,8 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.faltasSenador, 
                 subLabel:'Ausência',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#AB4263',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
@@ -166,7 +178,8 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.diasDeLicenca, 
                 subLabel:'Licença',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#66AB6D',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
@@ -174,7 +187,8 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.diasEmAP, 
                 subLabel:'Atividades Culturais',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#617888',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
@@ -182,7 +196,8 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.diasEmMissao, 
                 subLabel:'Dias em Missão',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#FFA3C9',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
@@ -190,7 +205,8 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.naoVotou, 
                 subLabel:'Presente mas não votou',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#6EBCCC',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
@@ -198,13 +214,19 @@ class DetailsSenadores extends Component {
                 label: '' + res.data.historico.obstrucoes, 
                 subLabel:'Obstruções',
                 style: {
-                  fill: 'rgba(0, 0, 0, 0)',
+                  fill: '#FAC438',
+                  stroke: 'rgba(0,0,0,0)',
                 }
               },
               { 
                 angle: res.data.historico.totalDeVotos, 
                 label: '' + res.data.historico.totalDeVotos, 
-                subLabel:'Presença *'},
+                subLabel:'Presença',
+                style: {
+                  fill: '#876DB3',
+                  stroke: 'rgba(0,0,0,0)',
+                }
+              },
               ]
             },
           },
@@ -241,7 +263,7 @@ class DetailsSenadores extends Component {
                 <p>UF: {this.state.uf}</p>
               </div>
             </div>
-            {this.state.atual &&
+            {this.state.atual.totalDeSessoes !== 0 &&
             <div className="info-container">
               <div className='legis-container'>
                 {
@@ -256,7 +278,8 @@ class DetailsSenadores extends Component {
                   <RadialChart
                   handleChartClick={() => this.handleChartClick()}
                   centerInfo={this.state.atual.presencaPorcentagem + '%'}
-                  data={this.state.atual.charts.sessoes} />
+                  data={this.state.atual.charts.sessoes}
+                  total={this.state.atual.totalDeSessoes} />
                 </div>
               </div>
               <hr/>
@@ -280,7 +303,8 @@ class DetailsSenadores extends Component {
                   <RadialChart
                   handleChartClick={() => this.handleChartClick()}
                   centerInfo={this.state.historico.presencaPorcentagem + '%'}
-                  data={this.state.historico.charts.sessoes} />
+                  data={this.state.historico.charts.sessoes}
+                  total={this.state.historico.totalDeSessoes} />
                 </div>
               </div>
               <hr/>

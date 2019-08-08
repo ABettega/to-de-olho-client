@@ -4,17 +4,24 @@ import { RadialChart, LabelSeries } from 'react-vis';
 const RChart = (props) => {
   console.log(props);
   return (
-    <RadialChart className="radial-chart" 
-    innerRadius={50} radius={120} showLabels={true}
-    onValueClick={props.handleChartClick}
-    data={props.data}
-    labelsRadiusMultiplier={1.6}
-    width={300}
-    height={300}
-    padAngle={0.04}
-    center={{x: 0, y: 0}}>
+    <div>
+      <RadialChart className="radial-chart" 
+      innerRadius={50} radius={120}
+      onValueClick={props.handleChartClick}
+      data={props.data}
+      width={300}
+      height={300}
+      padAngle={0.04}
+      center={{x: 0, y: 0}}>
       <LabelSeries data={[{x: 0, y: 0, yOffset: 8, xOffset: 2, label: `${props.centerInfo}`, style:{textAnchor: 'middle'}}]} />
-    </RadialChart>
+      </RadialChart>
+      <ul>
+        {props.data.map(dp => {
+          console.log(dp.angle, props.total)
+          return <li style={{color: dp.style.fill, listStyle: 'none' }}>{dp.subLabel} - {`${(Number((dp.angle / props.total)) * 100).toFixed(2)}%`}</li> 
+        })}
+      </ul>
+    </div>
   );
 }
 
