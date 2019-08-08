@@ -83,8 +83,8 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-  addpolitician(id, politico){
-    return this.service.post("/dashboard/add-politician", { id, politico })
+  addpolitician(id,politico){
+    return this.service.post("/dashboard/add-politician",{id,politico})
     .then(response => response.data)
     .catch(err => console.log(err));
   }
@@ -100,10 +100,33 @@ class AuthService {
     .then(response => response.data)
     .catch(err => console.log(err));
   }
-
+  
   sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
+    console.log(`deputados/sessoes/info/${legis}/${situacao}`);
     return this.service
     .post(`deputados/sessoes/info/${legis}/${situacao}`, {nomeDeputado, legislaturas})
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+
+  detailsVotacao(idVotacao) {
+    return this.service
+    .get(`/deputados/votacoes/${idVotacao}`)
+    .then(response => {
+      return axios.get(`https://dadosabertos.camara.leg.br/api/v2/proposicoes?siglaTipo=${response.data.documento.siglaTipo}&numero=${response.data.documento.numero}&ano=${response.data.documento.ano}&ordem=ASC&ordenarPor=id`)
+      .then(res => {
+        response.data.ementa = res.data.dados[0].ementa;
+        response.data.votos.sort((a, b) => a.deputado.localeCompare(b.deputado));
+        return response.data;
+      })
+      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+  }
+
+  getOneDeputado(nomeDeputado) {
+    return this.service
+    .get(`/deputados/nome/${nomeDeputado}`)
     .then(response => response.data)
     .catch(err => console.log(err));
   }
