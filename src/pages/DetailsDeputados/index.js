@@ -12,6 +12,7 @@ class DetailsDeputados extends Component {
     this.ctx = React.createRef();
     this.state = {
       showVotes: false,
+      messageBox: 'oi',
     }
     this.service = new AuthService();
     
@@ -24,7 +25,8 @@ class DetailsDeputados extends Component {
   
   dateToShow = (date) => {
     const arr = date.split('-');
-    return [arr[2], arr[1], arr[0]].join('/');
+    // return [arr[2], arr[1], arr[0]].join('/');
+    return arr[0];
   }
   
   componentDidMount() {
@@ -69,7 +71,6 @@ class DetailsDeputados extends Component {
               { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
                 label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
                 subLabel:'Não registrou voto',
-                angleDomain: 1.5,
                 style: {
                   fill: 'rgba(0, 0, 0, 0)',
                 }
@@ -140,7 +141,6 @@ class DetailsDeputados extends Component {
             { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
               label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
               subLabel:'Não registrou voto',
-              angleDomain: 1.5,
               style: {
                 fill: 'rgba(0, 0, 0, 0)',
               }
@@ -154,18 +154,35 @@ class DetailsDeputados extends Component {
     .catch(e => console.log(e));
   }
 
-  handleChartClick() {
-    this.setState({
-      showVotes: !this.state.showVotes,
-    })
+  handleChartClick(dp, legis) {
+    switch(dp.subLabel) {
+      case 'Votos':
+        console.log('Votos');
+        break;
+      case 'Não registrou voto':
+        console.log('Não registrou voto');
+        break;   
+      case 'Obstrução':
+        console.log('Obstruiu');
+        break;
+      case 'Presença':
+        this.service.sessoesPresentesDeputados('atual', 'presenca', this.state.politicianName, [this.state.atual.legislatura]).then(res => console.log(res));
+        break;
+      case 'Ausência':
+        // this.service.sessoesPresentesDeputados('atual', 'ausencia', this.state.politicianName, [this.state.atual.legislatura]).then(res => console.log(res));
+        break;
+    }
+    // this.setState({
+    //   showVotes: !this.state.showVotes,
+    //   messageBox: dp,
+    // })
   }
   
   render() {
     const {atual, historico} = this.state;
-    console.log()
     return (
       <Fragment>
-        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title="Oi"/>}
+        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title={this.state.messageBox} />}
         {(this.state.atual || this.state.historico) ?
           <div>
             <div className="politician-info-container">
@@ -185,16 +202,18 @@ class DetailsDeputados extends Component {
                 <div className="presenca-sessoes-container">
                   <p>Presença em sessões</p>
                   <RadialChart
-                  handleChartClick={() => this.handleChartClick()}
+                  handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.sessoes.percentualPresenca}
-                  data={atual.charts.sessoes} />
+                  data={atual.charts.sessoes} 
+                  legis="atual" />
                 </div>
                 <div className="presenca-sessoes-container">
                   <p>Presença em votações</p>
                   <RadialChart
-                  handleChartClick={() => this.handleChartClick()}
+                  handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.votos.percentualDeVotos}
-                  data={atual.charts.votacoes} />
+                  data={atual.charts.votacoes} 
+                  legis="atual" />
                 </div>
               </div>
               <hr/>
@@ -203,28 +222,30 @@ class DetailsDeputados extends Component {
           {this.state.historico ?
             <div className="info-container">
               <div className='legis-container'>
-                <p className="legis-text"><span>Histórico de legislaturas:</span> | {this.state.historico.legislaturas.map(legis => {return `${this.dateToShow(legis.dataInicio)} - ${this.dateToShow(legis.dataFim)} | `;})}</p>
+                <p className="legis-text"><span>Histórico de legislaturas:<br/></span> | {this.state.historico.legislaturas.map(legis => {return `${this.dateToShow(legis.dataInicio)} - ${this.dateToShow(legis.dataFim)} | `;})}</p>
               </div>
-              <div className="charts-container">
+              <div className="charts-container last">
                 <div className="presenca-sessoes-container">
                   <p>Presença em sessões</p>
                   <RadialChart
-                  handleChartClick={() => this.handleChartClick()}
+                  handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={historico.sessoes.percentualPresenca}
-                  data={historico.charts.sessoes} />
+                  data={historico.charts.sessoes} 
+                  legis="historico" />
                 </div>
                 <div className="presenca-sessoes-container">
                   <p>Presença em votações</p>
                   <RadialChart
-                  handleChartClick={() => this.handleChartClick()}
+                  handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={historico.votos.percentualDeVotos}
-                  data={historico.charts.votacoes} />
+                  data={historico.charts.votacoes} 
+                  legis="historico" />
                 </div>
               </div>
               <hr/>
             </div>
           :
-            <div className="loading-icon-historical">
+            <div className="loading-icon-historical last">
               <LoadingIcon />
               <p>Carregando</p>
             </div>
@@ -242,17 +263,3 @@ class DetailsDeputados extends Component {
 }
 
 export default DetailsDeputados;
-
-
-{/* <ul> Legislaturas:
-  {this.state.legislaturas.map((legis, idx) => {
-    return (
-      <ul key={idx} className="legislaturas-ul">
-      Legislatura {idx + 1}:
-      <li>De: {legis.dataInicio}</li>
-      <li>A: {legis.dataFim}</li>
-      </ul>
-      );
-    })}
-    <li />
-  </ul> */}
