@@ -57,7 +57,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={(props) => <Main {...props} />}></Route>
           <Route exact path='/registrar' render={(props) => <SignUpForm {...props} getUser={this.getTheUser} />}></Route>
-          <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
+          <Route exact path='/pesquisar' render={(props) => <ResearchPage user={this.state.loggedInUser} {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
           <Route path='/senador/:id' render={(props) => <DetailsSenadores {...props} />}></Route>

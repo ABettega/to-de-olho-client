@@ -83,17 +83,24 @@ class AuthService {
       .catch(err => console.log(err));
   }
 
-  addpolitician(id,politico){
-    return this.service.post("/dashboard/add-politician",{id,politico})
+  addpolitician(id, politico){
+    return this.service.post("/dashboard/add-politician", { id, politico })
     .then(response => response.data)
     .catch(err => console.log(err));
   }
 
   deletepolitician(id,politico){
     return this.service.post("/dashboard/delete-politician", {id,politico})
-    .then(response => console.log(response.data))
+    .then(response => response.data)
     .catch(err => console.log(err));
   }
+
+  getFavorites(email) {
+    return this.service.get("/dashboard/getFavorites", { email })
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+
   sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
     return this.service
     .post(`deputados/sessoes/info/${legis}/${situacao}`, {nomeDeputado, legislaturas})
