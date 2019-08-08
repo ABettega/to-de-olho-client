@@ -19,6 +19,10 @@ class App extends Component {
     this.service = new AuthService();
   }
 
+  componentDidMount() {
+    this.fetchUser();
+  }
+
   fetchUser(){
     if( this.state.loggedInUser === null ){
       this.service.loggedin()
@@ -55,7 +59,7 @@ class App extends Component {
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
           <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
-          <Route path='/dashboard/' render={() => <Dashboard/>}></Route>
+          <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
       </Fragment>
     );

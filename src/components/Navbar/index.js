@@ -13,6 +13,10 @@ class Navbar extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({...this.state, loggedInUser: nextProps["userInSession"]})
   }
+
+  componentDidMount() {
+    this.props.getUser();
+  }
   
   logoutUser = () =>{
     this.service.logout()
@@ -83,6 +87,14 @@ class Navbar extends Component {
                 <div onClick={() => this.logoutUser()}>
                   <img src="./images/user.png" alt="Imagem para logout" />
                   Sair
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link className="nav-a" to="/dashboard">
+                <div>
+                  <img src="./images/home.png" alt="Imagem para dashboard" />
+                  Dashboard
                 </div>
               </Link>
             </li>

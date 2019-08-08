@@ -3,10 +3,11 @@ import './dashboard.css'
 
 class Dashboard extends Component {
   constructor(props) {
+    console.log(props)
     super(props);
     this.state = {
-        userphoto:"",
-        username:"",
+        userphoto: "",
+        username: "",
         politicos:[1,2,3]
     };
   }
