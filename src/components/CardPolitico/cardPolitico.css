@@ -11,7 +11,9 @@
 }
 
 .add-poli{
-
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .card {
   background-repeat: no-repeat;
@@ -29,6 +31,7 @@
   margin: 0 8px;
   box-shadow: 0px 0px 20px 1px rgba(189, 189, 189, 0.47);
   flex-shrink: 0;
+  position: relative;
 
 }
 .card-slider {

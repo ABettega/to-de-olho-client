@@ -27,7 +27,8 @@ class Navbar extends Component {
   }
 
   render() {
-    if (this.state.loggedInUser === null) {
+    console.log(this.state.loggedInUser)
+    if (this.state.loggedInUser === null || this.state.loggedInUser === false) {
       return (
         <nav>
           <ul className="nav-ul">

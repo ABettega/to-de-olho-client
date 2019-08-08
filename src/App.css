@@ -16,3 +16,7 @@ body{
 h2{
   font-weight: 400;
 }
+
+.pre-nav-mobile {
+  height: 10px;
+}

@@ -61,6 +61,7 @@ class App extends Component {
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
           <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
+        <div className="pre-nav-mobile"></div>
       </Fragment>
     );
   }
