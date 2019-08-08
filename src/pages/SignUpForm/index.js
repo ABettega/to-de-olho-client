@@ -66,6 +66,7 @@ class Form extends Component {
                 error: false,
                 errorMessage: ''
               });
+              this.props.getUser(response);
               this.props.history.push({
                 pathname: '/pesquisar',
                 state: {loginMessage: 'Obrigado por fazer o registro!'}

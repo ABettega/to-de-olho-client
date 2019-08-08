@@ -1,4 +1,5 @@
 import axios from "axios";
+import { compose } from "@material-ui/system";
 
 class AuthService {
   constructor() {
@@ -31,18 +32,44 @@ class AuthService {
         username: email,
         password
       })
+      .then(response => { return response.data })
+      .catch(err => console.log(err));
+  }
+
+  loggedin = () => {
+    return this.service.get('/auth/loggedin')
+    .then(response => response.data)
+  }
+  
+  logout() {
+    return this.service
+      .get('/auth/logout')
       .then(response => response.data)
       .catch(err => console.log(err));
   }
 
-  deputados() {
+  deputadosatuais() {
     return this.service
       .get("/deputados/atuais")
       .then(response => response.data)
       .catch(err => console.log(err));
   }
 
-  senadores() {
+  deputadostodos() {
+    return this.service
+      .get("/deputados/")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  senadorestodos() {
+    return this.service
+      .get("/senadores/historico")
+      .then(response => response.data)
+      .catch(err => console.log(err));
+  }
+
+  senadoresatuais() {
     return this.service
       .get("/senadores")
       .then(response => response.data)
@@ -54,6 +81,24 @@ class AuthService {
       .get(`/deputados/sessoes/${id}`)
       .then(response => response.data)
       .catch(err => console.log(err));
+  }
+
+  addpolitician(id,politico){
+    return this.service.post("/dashboard/add-politician",{id,politico})
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+
+  deletepolitician(id,politico){
+    return this.service.post("/dashboard/delete-politician", {id,politico})
+    .then(response => console.log(response.data))
+    .catch(err => console.log(err));
+  }
+  sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
+    return this.service
+    .post(`deputados/sessoes/info/${legis}/${situacao}`, {nomeDeputado, legislaturas})
+    .then(response => response.data)
+    .catch(err => console.log(err));
   }
 }
 

@@ -5,9 +5,18 @@ nav {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #4bbf5b;
   padding: 10px 0;
   z-index: 2;
+  background-color: red;
+}
+
+nav::before {
+  display: block; 
+  content: " "; 
+  margin-top: -285px; 
+  height: 285px; 
+  visibility: hidden; 
+  pointer-events: none;
 }
 
 nav img {
@@ -44,7 +53,6 @@ nav li {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    background-color: #4bbf5b;
     padding: 10px 0;
   }
 
