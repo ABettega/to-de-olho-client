@@ -7,6 +7,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import LoadingIcon from "../../components/LoadingIcon";
+import './MessageBox.css';
+
 
 function PaperComponent(props) {
   return (
@@ -17,15 +20,15 @@ function PaperComponent(props) {
 }
 
 export default function DraggableDialog(props) {
-  const handleClose = () => {
-    props.handleChartClick();
-  };
+  // const handleClose = () => {
+  //   props.handleChartClick();
+  // };
 
   return (
     <div>
       <Dialog
         open={true}
-        onClose={handleClose}
+        // onClose={handleClose}
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
       >
@@ -33,13 +36,25 @@ export default function DraggableDialog(props) {
           {props.title}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+          <DialogContentText className="dialog">
+            <ul className="ul-sessoes-votacoes">
+            {props.sessoesPresenca ? props.sessoesPresenca.map(sessao => {
+              if (sessao.nomeDaSessao) {
+                return <li>{sessao.nomeDaSessao}</li>
+              } else if (sessao.documento) {
+                return <li>{sessao.dataInicio.slice(0, 10)}: <span>{sessao.documento.siglaTipo} {sessao.documento.numero}/{sessao.documento.ano}</span> - {sessao.proposicao}</li>
+              }
+            }) :
+            <div className="loading-icon-container-msg">
+              <LoadingIcon />
+              <p>Carregando</p>
+            </div>
+            }
+            </ul>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={props.handleCancelMessageBox} color="primary">
             Cancel
           </Button>
         </DialogActions>
