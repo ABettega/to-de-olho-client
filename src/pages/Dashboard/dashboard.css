@@ -5,6 +5,28 @@
     background-size: cover;
 }
 
+.add-poli {
+  appearance: none;
+  position: absolute;
+  width: 35px;
+  height: 60px;
+  top: 0;
+  right: 0;
+  padding-right: 5px;
+  background-image: url('/images/favorite-unchecked.png');
+  background-size: 35px 60px;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+}
+
+.add-poli:checked {
+  background-image: url('/images/favorite-checked.png');
+}
+
+.add-poli:hover {
+  animation: pulse_favorite 1s ease;
+}
+
 .card-politician-horizontal {
   width: 350px;
   height: 200px;

@@ -12,7 +12,8 @@ class Dashboard extends Component {
       depFavoritos: [],
       senFavoritos: [],
       deputadostodos: [],
-      senadorestodos: []
+      senadorestodos: [],
+      user: this.props.user
     };
     this.service = new AuthService();
   }
@@ -84,6 +85,8 @@ class Dashboard extends Component {
                   backImage={
                     senador.IdentificacaoParlamentar.UrlFotoParlamentar
                   }
+                  className="add-poli"
+                  user={this.state.user}
                 />
               );
             })}
@@ -94,13 +97,14 @@ class Dashboard extends Component {
             .map(deputado => {
               return (
                 <CardPolitico
-                      className="card-politician-horizontal "
-                      key={deputado.id}
-                      id={deputado.id}
-                      politician="/deputado/"
-                      politicianName={this.titleCase(deputado.nomeDeputado)}
-                      uf={deputado.siglaUf}
-                      backImage={deputado.urlFoto}
+                  className="card-politician-horizontal add-poli"
+                  key={deputado.id}
+                  id={deputado.id}
+                  politician="/deputado/"
+                  politicianName={this.titleCase(deputado.nomeDeputado)}
+                  uf={deputado.siglaUf}
+                  backImage={deputado.urlFoto}
+                  user={this.state.user}
                 />
               );
             })}
