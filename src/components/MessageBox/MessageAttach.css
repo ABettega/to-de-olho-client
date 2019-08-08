@@ -1,0 +1,21 @@
+.ul-sessoes-votacoes {
+  font-size: 0.9rem;
+}
+
+.ul-sessoes-votacoes li{
+  margin-bottom: 8px;
+}
+
+@media(max-width: 681px) {
+  .ul-sessoes-votacoes {
+    font-size: 0.8rem;
+  }
+}
+
+.ul-sessoes-votacoes span{
+  font-weight: bold;
+}
+
+.dialog {
+  padding: 20px;
+}
