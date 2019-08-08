@@ -3,7 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import './detailssenadores.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
-import RadialChart from '../../components/Charts/RadialChart';
+import RadialChart from '../../components/Charts/RadialChartSenadores';
 
 class DetailsSenadores extends Component {
   constructor(props) {
@@ -256,11 +256,10 @@ class DetailsSenadores extends Component {
          {(this.state.atual || this.state.historico) ?
           <div>
             <div className="politician-info-container">
-              <img src={this.state.UrlFotoParlamentar} alt={`Foto do deputado ${this.state.nome}`} />
+              <img src={this.state.UrlFotoParlamentar} alt={`Foto do senador ${this.state.nome}`} />
               <div className="politician-info">
-                <p>Nome: {this.state.nome}</p>
-                <p>Partido: {this.state.sigla}</p>
-                <p>UF: {this.state.uf}</p>
+                <p>{this.state.nome}</p>
+                <p>{this.state.sigla} - {this.state.uf}</p>
               </div>
             </div>
             {this.state.atual.totalDeSessoes !== 0 &&
