@@ -3,7 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import './detailsdeputados.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
-import { RadialChart, LabelSeries } from 'react-vis';
+import RadialChart from '../../components/Charts/RadialChart';
 import MessageAttach from '../../components/MessageBox/MessageAttach';
 
 class DetailsDeputados extends Component {
@@ -44,7 +44,8 @@ class DetailsDeputados extends Component {
               presente: sessoes.presente,
               percentualPresenca: sessoes.percentualPresenca,
             },
-            charts: [
+            charts: {
+              sessoes: [
               { angle: sessoes.total - sessoes.presente, 
                 label: '' + (sessoes.total - sessoes.presente), 
                 subLabel:'Ausência',
@@ -56,6 +57,25 @@ class DetailsDeputados extends Component {
                 label: '' + sessoes.presente, 
                 subLabel:'Presença'},
             ],
+            votacoes: [
+              { angle: votos.totalDeVotos, 
+                label: '' + votos.totalDeVotos, 
+                subLabel:'Votos',
+              },
+              { angle: votos.obstrucao, 
+                label: '' + votos.obstrucao, 
+                subLabel:'Obstrução'
+              },
+              { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
+                label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
+                subLabel:'Não registrou voto',
+                angleDomain: 1.5,
+                style: {
+                  fill: 'rgba(0, 0, 0, 0)',
+                }
+              },
+            ],
+          },
             votos: {
               sim: votos.sim,
               nao: votos.nao,
@@ -73,8 +93,12 @@ class DetailsDeputados extends Component {
     
     axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}/historico`)
     .then(politicianHist => {
-      const { legislaturas, sessoes, votos } = politicianHist.data;
+      const { legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto } = politicianHist.data;
       this.setState({
+        politicianName: this.toTitleCase(nomeDeputado),
+        partido: partido,
+        uf: uf,
+        foto: foto,
         historico: {
           legislaturas: legislaturas,
           sessoes: {
@@ -91,6 +115,39 @@ class DetailsDeputados extends Component {
             totalDeVotacoes: votos.totalDeVotacoes,
             percentualDeVotos: votos.percentualDeVotos,
           },
+          charts: {
+            sessoes: [
+            { angle: sessoes.total - sessoes.presente, 
+              label: '' + (sessoes.total - sessoes.presente), 
+              subLabel:'Ausência',
+              style: {
+                fill: 'rgba(0, 0, 0, 0)',
+              }
+            },
+            { angle: sessoes.presente, 
+              label: '' + sessoes.presente, 
+              subLabel:'Presença'},
+          ],
+          votacoes: [
+            { angle: votos.totalDeVotos, 
+              label: '' + votos.totalDeVotos, 
+              subLabel:'Votos',
+            },
+            { angle: votos.obstrucao, 
+              label: '' + votos.obstrucao, 
+              subLabel:'Obstrução'
+            },
+            { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
+              label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
+              subLabel:'Não registrou voto',
+              angleDomain: 1.5,
+              style: {
+                fill: 'rgba(0, 0, 0, 0)',
+              }
+            },
+          ],
+        },
+
         }
       })
     })
@@ -104,116 +161,82 @@ class DetailsDeputados extends Component {
   }
   
   render() {
-    const atual = this.state.atual;
+    const {atual, historico} = this.state;
     console.log()
     return (
       <Fragment>
         { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title="Oi"/>}
-      {this.state.atual ?
-        <div>
-        <div className="politician-info-container">
-        <img src={this.state.foto} alt={`Foto do deputado ${this.state.politicianName}`} />
-        <div className="politician-info">
-        <p>Nome: {this.state.politicianName}</p>
-        <p>Partido: {this.state.partido}</p>
-        <p>UF: {this.state.uf}</p>
-        </div>
-        </div>
-        <div className="info-container">
-        <div className='legis-container'>
-        <p className="legis-text"><span>Legislatura:</span> {this.dateToShow(atual.legislatura.dataInicio)} - {this.dateToShow(atual.legislatura.dataFim)}</p>
-        </div>
-        <div className="charts-container">
-        <div className="presenca-sessoes-container">
-        <p>Presença em sessões</p>
-        <RadialChart 
-        className="radial-chart"
-        innerRadius={40}
-        radius={80}
-        showLabels={true}
-        onValueClick={(dp, e) => {
-          this.handleChartClick(dp);
-        }}
-        data={this.state.atual.charts}
-          labelsRadiusMultiplier={1.6}
-          width={300}
-          height={300}
-          padAngle={0.04}
-          center={{x: 0, y: 0}}
-          >
-          <LabelSeries data={[{x: 0, y: 0, yOffset: 8, xOffset: 2, label: `${atual.sessoes.percentualPresenca}`, style:{textAnchor: 'middle'}}]}></LabelSeries>
-          </RadialChart>
-          {/* <p>Presente em {atual.sessoes.percentualPresenca} ({atual.sessoes.presente}/{atual.sessoes.total}) das sessões.</p>
-          <p>Votou em {atual.votos.percentualDeVotos} ({atual.votos.totalDeVotos}/{atual.votos.totalDeVotacoes}) das votações em que compareceu.</p>
-          <p>Obstruiu a votação {atual.votos.obstrucao} vezes</p>
-        <p><span>(Obstruções contam como 'presença' na votação)</span></p> */}
-        </div>
-        <div className="presenca-sessoes-container">
-        <p>Presença em votações</p>
-        <RadialChart
-        className="radial-chart"
-        innerRadius={40}
-        radius={80}
-        showLabels={true}
-        data={[
-          { angle: atual.votos.totalDeVotos, 
-            label: '' + atual.votos.totalDeVotos, 
-            subLabel:'Votos',
-          },
-          { angle: atual.votos.obstrucao, 
-            label: '' + atual.votos.obstrucao, 
-            subLabel:'Obstrução'
-          },
-          { angle: atual.votos.totalDeVotacoes - atual.votos.obstrucao - atual.votos.totalDeVotos, 
-            label: '' + (atual.votos.totalDeVotacoes - atual.votos.obstrucao - atual.votos.totalDeVotos), 
-            subLabel:'Não registrou voto',
-            angleDomain: 1.5,
-            style: {
-              fill: 'rgba(0, 0, 0, 0)',
-            }
-          },
-        ]}
-        labelsRadiusMultiplier={1.6}
-        width={300}
-        height={300}
-        padAngle={0.04}
-        center={{x: 0, y: 0}}
-        >
-        <LabelSeries data={[{x: 0, y: 0, yOffset: 8, xOffset: 2, label: `${this.state.atual.votos.percentualDeVotos}`, style:{textAnchor: 'middle'}}]}></LabelSeries>
-        </RadialChart>
-        {/* <p className="legis-text">| {this.dateToShow(this.state.atual.legislatura.dataInicio)} - {this.dateToShow(this.state.atual.legislatura.dataFim)} |</p> */}
-        {/* <p>Presente em {this.state.atual.sessoes.percentualPresenca} ({this.state.atual.sessoes.presente}/{this.state.atual.sessoes.total}) das sessões.</p>
-        <p>Votou em {this.state.atual.votos.percentualDeVotos} ({this.state.atual.votos.totalDeVotos}/{this.state.atual.votos.totalDeVotacoes}) das votações em que compareceu.</p>
-        <p>Obstruiu a votação {this.state.atual.votos.obstrucao} vezes</p>
-      <p><span>(Obstruções contam como 'presença' na votação)</span></p> */}
-      </div>
-      </div>
-      <hr/>
-      </div>
-      {this.state.historico ?
-        <div>
-        <p className="legis-text">Legislaturas: {this.state.historico.legislaturas.map(legis => {
-          return `${this.dateToShow(legis.dataInicio)} - ${this.dateToShow(legis.dataFim)} | `;
-        })}</p>
-        <p>Presente em {this.state.historico.sessoes.percentualPresenca} ({this.state.historico.sessoes.presente}/{this.state.historico.sessoes.total}) das sessões.</p>
-        <p>Votou em {this.state.historico.votos.percentualDeVotos} ({this.state.historico.votos.totalDeVotos}/{this.state.historico.votos.totalDeVotacoes}) das votações em que compareceu.</p>
-        <p>Obstruiu a votação {this.state.historico.votos.obstrucao} vezes</p>
-        <p><span>(Obstruções contam como 'presença' na votação)</span></p>
-        </div>
+        {(this.state.atual || this.state.historico) ?
+          <div>
+            <div className="politician-info-container">
+              <img src={this.state.foto} alt={`Foto do deputado ${this.state.politicianName}`} />
+              <div className="politician-info">
+                <p>Nome: {this.state.politicianName}</p>
+                <p>Partido: {this.state.partido}</p>
+                <p>UF: {this.state.uf}</p>
+              </div>
+            </div>
+          {this.state.atual &&
+            <div className="info-container">
+              <div className='legis-container'>
+                <p className="legis-text"><span>Legislatura:</span> {this.dateToShow(atual.legislatura.dataInicio)} - {this.dateToShow(atual.legislatura.dataFim)}</p>
+              </div>
+              <div className="charts-container">
+                <div className="presenca-sessoes-container">
+                  <p>Presença em sessões</p>
+                  <RadialChart
+                  handleChartClick={() => this.handleChartClick()}
+                  centerInfo={atual.sessoes.percentualPresenca}
+                  data={atual.charts.sessoes} />
+                </div>
+                <div className="presenca-sessoes-container">
+                  <p>Presença em votações</p>
+                  <RadialChart
+                  handleChartClick={() => this.handleChartClick()}
+                  centerInfo={atual.votos.percentualDeVotos}
+                  data={atual.charts.votacoes} />
+                </div>
+              </div>
+              <hr/>
+            </div>
+          }
+          {this.state.historico ?
+            <div className="info-container">
+              <div className='legis-container'>
+                <p className="legis-text"><span>Histórico de legislaturas:</span> | {this.state.historico.legislaturas.map(legis => {return `${this.dateToShow(legis.dataInicio)} - ${this.dateToShow(legis.dataFim)} | `;})}</p>
+              </div>
+              <div className="charts-container">
+                <div className="presenca-sessoes-container">
+                  <p>Presença em sessões</p>
+                  <RadialChart
+                  handleChartClick={() => this.handleChartClick()}
+                  centerInfo={historico.sessoes.percentualPresenca}
+                  data={historico.charts.sessoes} />
+                </div>
+                <div className="presenca-sessoes-container">
+                  <p>Presença em votações</p>
+                  <RadialChart
+                  handleChartClick={() => this.handleChartClick()}
+                  centerInfo={historico.votos.percentualDeVotos}
+                  data={historico.charts.votacoes} />
+                </div>
+              </div>
+              <hr/>
+            </div>
+          :
+            <div className="loading-icon-historical">
+              <LoadingIcon />
+              <p>Carregando</p>
+            </div>
+          }
+          </div>
         :
-        <div className="loading-icon-historical">
-        <LoadingIcon />
-        <p>Carregando</p>
-        </div>
-      }
-      </div>
-      :
-      <div className="loading-icon-container">
-      <LoadingIcon />
-      <p>Carregando</p>
-      </div>
-    }
-    </Fragment >
+          <div className="loading-icon-container">
+            <LoadingIcon />
+            <p>Carregando</p>
+          </div>
+        }
+      </Fragment >
     );
   }
 }
