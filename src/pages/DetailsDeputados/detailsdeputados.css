@@ -5,7 +5,7 @@
 }
 
 .politician-info-container img {
-  height: fit-content;
+  height: auto;
   width: 130px;
 }
 
@@ -46,9 +46,20 @@
   align-items: center;
 }
 
+.loading-icon-container-msg {
+  width: 300px;
+  height: 150px;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .legis-text {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   color: #777;
+  border-bottom: 1px solid #777;
 }
 
 .presenca-sessoes-container {
@@ -60,9 +71,28 @@
   box-sizing: border-box;
 }
 
+.info-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
+}
+
 .charts-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+}
+
+.legis-container {
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.last {
+  padding-bottom: 90px;
+}
+
+.rv-xy-plot__series:hover {
+  cursor: pointer;
 }

@@ -7,21 +7,63 @@ import ResearchPage from "./pages/ResearchPage";
 import DetailsDeputados from "./pages/DetailsDeputados";
 import DetailsSenadores from "./pages/DetailsSenadores";
 import LoginForm from "./pages/Login";
+import Dashboard from "./pages/Dashboard"
 import { Switch, Route } from 'react-router-dom';
+import AuthService from './components/Auth/auth-services';
+import ProtectedRoute from './components/Auth/protected-route';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { loggedInUser: null };
+    this.service = new AuthService();
+  }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  fetchUser(){
+    if( this.state.loggedInUser === null ){
+      this.service.loggedin()
+      .then(response =>{
+        this.setState({
+          loggedInUser:  response
+        }) 
+      })
+      .catch( err =>{
+        this.setState({
+          loggedInUser:  false
+        }) 
+      })
+    }
+  }
+
+  getTheUser = (userObj) => {
+    this.setState({
+      loggedInUser: userObj
+    })
+  }
+  
   render() {
+    const sessionVar = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
     return (
       <Fragment>
-        <Navbar/>
+        <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
         <Switch>
-          <Route exact path='/' render={() => <Main/>}></Route>
-          <Route exact path='/entrar' render={(props) => <SignUpForm {...props} />}></Route>
+          <Route exact path='/' render={(props) => <Main {...props} />}></Route>
+          <Route exact path='/registrar' render={(props) => <SignUpForm {...props} getUser={this.getTheUser} />}></Route>
           <Route exact path='/pesquisar' render={(props) => <ResearchPage {...props} />}></Route>
-          <Route exact path='/login' render={(props) => <LoginForm {...props} />}></Route>
+          <Route exact path='/login' render={(props) => <LoginForm {...props} getUser={this.getTheUser} />}></Route>
           <Route path='/deputado/:id' render={(props) => <DetailsDeputados {...props} />}></Route>
           <Route path='/senador/:id' render={(props) => <DetailsSenadores {...props} />}></Route>
+          <ProtectedRoute path='/dashboard' user={this.state.loggedInUser} getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
+        <div className="pre-nav-mobile"></div>
       </Fragment>
     );
   }

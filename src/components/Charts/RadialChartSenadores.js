@@ -4,12 +4,13 @@ import './radialChartSenadores.css'
 
 const RChart = (props) => {
   return (
-    <div className="chart-div">
+    <div>
       <RadialChart className="radial-chart" 
-      innerRadius={50} radius={120}
-      onValueClick={props.handleChartClick}
+      innerRadius={40} radius={80} showLabels={false}
+      onValueClick={(dp, e) => props.handleChartClick(dp, props.legis)}
       data={props.data}
-      width={300}
+      labelsRadiusMultiplier={1.6}
+      width={250}
       height={300}
       padAngle={0.04}
       center={{x: 0, y: 0}}>
@@ -20,7 +21,7 @@ const RChart = (props) => {
           return <li key={idx} style={{color: dp.style.fill, listStyle: 'none' }}>{dp.subLabel} - {`${(Number((dp.angle / props.total)) * 100).toFixed(2)}%`}</li> 
         })}
       </ul>
-    </div>
+  </div>
   );
 }
 

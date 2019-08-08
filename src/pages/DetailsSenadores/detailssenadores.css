@@ -7,8 +7,8 @@
 }
 
 .politician-info-container img {
-  height: 180px;
-  width: 130px;
+  width: 20%;
+  height: auto;
 }
 
 .politician-info {
