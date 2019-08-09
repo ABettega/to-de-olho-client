@@ -129,6 +129,7 @@ class ResearchPage extends Component {
                     <CardPolitico
                       key={senador.IdentificacaoParlamentar.CodigoParlamentar}
                       id={senador.IdentificacaoParlamentar.CodigoParlamentar}
+                      siglaPartido={senador.IdentificacaoParlamentar.siglaPartidoParlamentar}
                       politician="/senador/"
                       politicianName={this.titleCase(
                         senador.IdentificacaoParlamentar.NomeParlamentar
@@ -156,6 +157,7 @@ class ResearchPage extends Component {
                     <CardPolitico
                       key={deputado.id}
                       id={deputado.id}
+                      siglaPartido={deputado.siglaPartido}
                       politician="/deputado/"
                       politicianName={this.titleCase(deputado.nomeDeputado)}
                       uf={deputado.siglaUf}

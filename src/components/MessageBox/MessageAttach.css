@@ -1,9 +1,10 @@
 .ul-sessoes-votacoes {
   font-size: 0.9rem;
+  list-style: none;
 }
 
 .ul-sessoes-votacoes li{
-  margin-bottom: 8px;
+  margin-bottom: 19px;
 }
 
 @media(max-width: 681px) {
@@ -17,5 +18,13 @@
 }
 
 .dialog {
-  padding: 20px;
+  padding: 10px;
+}
+
+.link-to-votes {
+  padding: 8px;
+  border-bottom: #CCC;
+  border-radius: 3px;
+  text-decoration: none;
+  color: black;
 }
