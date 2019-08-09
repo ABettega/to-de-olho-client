@@ -149,7 +149,7 @@ class DetailsSenadores extends Component {
         this.setState({
           nome,
           UrlFotoParlamentar,
-          sigla,
+          // sigla,
           uf,
           historico: {
             diasDeLicenca,
