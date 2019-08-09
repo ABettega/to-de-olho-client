@@ -121,7 +121,7 @@ class Dashboard extends Component {
                   politicianName={this.titleCase(deputado.nomeDeputado)}
                   uf={deputado.siglaUf}
                   backImage={deputado.urlFoto}
-                  siglaPartido={deputado.sigla}
+                  siglaPartido={deputado.siglaPartido}
                 />
               );
             })}
