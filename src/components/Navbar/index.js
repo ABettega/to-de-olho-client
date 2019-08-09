@@ -26,7 +26,7 @@ class Navbar extends Component {
   };
 
   render() {
-    if (this.state.loggedInUser === null || this.state.loggedInUser === false) {
+    if (this.state.loggedInUser === false || this.state.loggedInUser === null || this.state.loggedInUser === undefined) {
       return (
         <nav>
           <ul className="nav-ul">
@@ -43,7 +43,7 @@ class Navbar extends Component {
                 <div>
                   <img
                     id="registrar"
-                    src="./images/user.png"
+                    src="/images/user.png"
                     alt="Imagem para registrar"
                   />
                   Registrar
@@ -55,7 +55,7 @@ class Navbar extends Component {
                 <div>
                   <img
                     id="login"
-                    src="./images/user.png"
+                    src="/images/user.png"
                     alt="Imagem para login"
                   />
                   Login
@@ -67,7 +67,7 @@ class Navbar extends Component {
                 <div>
                   <img
                     id="pesquisar"
-                    src="./images/pesquisar.png"
+                    src="/images/pesquisar.png"
                     alt="Imagem para pesquisar"
                   />
                   Pesquisar
@@ -90,7 +90,6 @@ class Navbar extends Component {
             <li>
               <Link className="nav-a home" to="/">
                 <div>
-                  {/* <img src="./images/home.png" alt="Imagem para home" /> */}
                   Home
                 </div>
               </Link>
@@ -100,7 +99,7 @@ class Navbar extends Component {
                 <div>
                   {/* <img
                     id="pesquisar"
-                    src="./images/pesquisar.png"
+                    src="/images/pesquisar.png"
                     alt="Imagem para pesquisar"
                   /> */}
                   Pesquisar

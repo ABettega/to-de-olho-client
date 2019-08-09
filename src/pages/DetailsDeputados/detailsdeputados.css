@@ -29,6 +29,7 @@
 
 .loading-icon-container {
   width: 100vw;
+  max-width: 100%;
   height: 85vh;
   display: flex;
   flex-flow: column nowrap;
@@ -38,6 +39,7 @@
 
 .loading-icon-historical {
   width: 100vw;
+  max-width: 100%;
   height: fit-content;
   
   display: flex;

@@ -4,7 +4,7 @@ import { compose } from "@material-ui/system";
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: "http://localhost:5000",
+      baseURL: `${process.env.REACT_APP_API_URL}`,
       withCredentials: true
     });
     this.service = service;
@@ -65,7 +65,7 @@ class AuthService {
   senadorestodos() {
     return this.service
       .get("/senadores/historico")
-      .then(response => response.data)
+      .then(response => response.data.todosSenadores)
       .catch(err => console.log(err));
   }
 
@@ -91,12 +91,42 @@ class AuthService {
 
   deletepolitician(id,politico){
     return this.service.post("/dashboard/delete-politician", {id,politico})
-    .then(response => console.log(response.data))
+    .then(response => response.data)
     .catch(err => console.log(err));
   }
+
+  getFavorites(email) {
+    return this.service.get("/dashboard/getFavorites", { email })
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+  
   sessoesPresentesDeputados(legis, situacao, nomeDeputado, legislaturas) {
+    console.log(`deputados/sessoes/info/${legis}/${situacao}`);
     return this.service
     .post(`deputados/sessoes/info/${legis}/${situacao}`, {nomeDeputado, legislaturas})
+    .then(response => response.data)
+    .catch(err => console.log(err));
+  }
+
+  detailsVotacao(idVotacao) {
+    return this.service
+    .get(`/deputados/votacoes/${idVotacao}`)
+    .then(response => {
+      return axios.get(`https://dadosabertos.camara.leg.br/api/v2/proposicoes?siglaTipo=${response.data.documento.siglaTipo}&numero=${response.data.documento.numero}&ano=${response.data.documento.ano}&ordem=ASC&ordenarPor=id`)
+      .then(res => {
+        response.data.ementa = res.data.dados[0].ementa;
+        response.data.votos.sort((a, b) => a.deputado.localeCompare(b.deputado));
+        return response.data;
+      })
+      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+  }
+
+  getOneDeputado(nomeDeputado) {
+    return this.service
+    .get(`/deputados/nome/${nomeDeputado}`)
     .then(response => response.data)
     .catch(err => console.log(err));
   }

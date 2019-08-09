@@ -29,19 +29,38 @@ class Main extends Component {
         </main>
         <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
         <Slider>
-        <CardPolitico
-                      key={5894}
-                      id={5894}
-                      politician="/senador/"
-                      politicianName={
-                       "Flávio Bolsonaro"
-                      }
-                      uf="RJ"
-                      backImage="http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg"
-                    />
-          <CardPolitico />
-          <CardPolitico />
-          <CardPolitico />
+        <CardPolitico 
+          id='945'
+          politician="/senador/"
+          politicianName='Alvaro Dias'
+          uf='PR'
+          backImage='http://www.senado.leg.br/senadores/img/fotos-oficiais/senador945.jpg'
+          siglaPartido='PODEMOS'
+        />
+        <CardPolitico 
+          id='5666'
+          politician="/senador/"
+          politicianName='Major Olimpio'
+          uf='RO'
+          backImage='http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5666.jpg'
+          siglaPartido='PSL'
+        />
+        <CardPolitico 
+          id='178956'
+          politician="/deputado/"
+          politicianName='Mariana Carvalho'
+          uf='RO'
+          backImage='https://www.camara.leg.br/internet/deputado/bandep/178956.jpg'
+          siglaPartido='PSDB'
+        />
+        <CardPolitico 
+          id='204464'
+          politician='/deputado/'
+          politicianName='Talíria Petrone'
+          uf='RJ'
+          backImage='https://www.camara.leg.br/internet/deputado/bandep/204464.jpgmaior.jpg'
+          siglaPartido='PSOL'
+        />
         </Slider>
         <Button class="ligth-green" to="/pesquisar">COMO FUNCIONA ?</Button>
       </Fragment>
@@ -50,3 +69,16 @@ class Main extends Component {
 }
 
 export default Main;
+/*
+className="card-politician-horizontal"
+                  key={senador.IdentificacaoParlamentar.CodigoParlamentar}
+                  id={senador.IdentificacaoParlamentar.CodigoParlamentar}
+                  politician="/senador/"
+                  politicianName={this.titleCase(
+                    senador.IdentificacaoParlamentar.NomeParlamentar
+                  )}
+                  uf={senador.IdentificacaoParlamentar.UfParlamentar}
+                  backImage={
+                    senador.IdentificacaoParlamentar.UrlFotoParlamentar
+                  }
+                  */
