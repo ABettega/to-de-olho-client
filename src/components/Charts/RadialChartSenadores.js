@@ -4,7 +4,7 @@ import './radialChartSenadores.css'
 
 const RChart = (props) => {
   return (
-    <div>
+    <div className="chart-div">
       <RadialChart className="radial-chart" 
       innerRadius={40} radius={80} showLabels={false}
       onValueClick={(dp, e) => props.handleChartClick(dp, props.legis)}
