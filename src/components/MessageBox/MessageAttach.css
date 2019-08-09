@@ -15,6 +15,7 @@
 
 .ul-sessoes-votacoes span{
   font-weight: bold;
+  color: #4bbf5b;
 }
 
 .dialog {
@@ -26,5 +27,20 @@
   border-bottom: #CCC;
   border-radius: 3px;
   text-decoration: none;
-  color: black;
+  color: rgb(120,120,120);
+}
+
+#draggable-dialog-title {
+  color: #4bbf5b;
+}
+
+.MuiButton-root {
+  color: white !important;
+  background-color: #89ce64 !important;
+  /* border-radius: 30% !important; */
+  padding: 8px 20px !important;
+}
+
+.MuiButton-root:hover {
+  background-color: #2da661 !important;
 }

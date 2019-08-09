@@ -50,7 +50,7 @@ export default function DraggableDialog(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleCancelMessageBox} color="primary">
+          <Button onClick={props.handleCancelMessageBox} color="default" >
             Cancel
           </Button>
         </DialogActions>
