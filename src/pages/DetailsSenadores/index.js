@@ -234,6 +234,14 @@ class DetailsSenadores extends Component {
         });
       })
       .catch(e => console.log(e));
+
+      axios.get(`https://legis.senado.leg.br/dadosabertos/senador/${this.props.match.params.id}`)
+        .then((senador) => {
+          this.setState({
+            email: senador.data.DetalheParlamentar.Parlamentar.IdentificacaoParlamentar.EmailParlamentar
+          })
+        })
+        .catch(e => console.log(e));
   }
 
   handleChartClick() {
@@ -260,6 +268,7 @@ class DetailsSenadores extends Component {
               <img src={this.state.UrlFotoParlamentar} alt={`Foto do senador ${this.state.nome}`} />
               <div className="politician-info">
                 <p>{this.state.nome}</p>
+                <p>{this.state.email}</p>
                 <p>{this.state.sigla} - {this.state.uf}</p>
               </div>
             </div>
