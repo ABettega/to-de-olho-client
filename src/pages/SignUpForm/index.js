@@ -105,6 +105,7 @@ class Form extends Component {
       erro = this.state.errorMessage;
     }
     return (
+      <div className="div-login">
       <form onSubmit={e => this.handleFormSubmit(e)} className="form">
         <h1>Sign Up</h1>
         <Input
@@ -189,6 +190,7 @@ class Form extends Component {
         <button className="button-a ligth-green" type="submit">Submit</button>
         <label className='mensagem-erro'>{erro}</label>
       </form>
+      </div>
     );
   }
 }

@@ -9,18 +9,16 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color:#4bbf5b;
     justify-content: center;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    background-color: white;
     height: 260px;
 }
 
 h1{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: initial;
+    font-family: 'Blinker', sans-serif;
     font-size: 50px;
-    color:white;
+    font-weight: 400;
+    color: #4bbf5b;
     padding-bottom: 15px;
     /* width: 150px; */
 }
@@ -28,4 +26,8 @@ h1{
 h3{
     color:white;
     text-align: center;
+}
+
+.gif{
+    width:180px;
 }
