@@ -8,14 +8,18 @@
   display: flex;
   justify-content: center;
   align-items:center;
-  height: 100vh;
+  height: 85vh;
 }
 
 form{
-  box-shadow: 0px 0px 20px 1px rgba(189, 189, 189, 0.47);
   width: 100%;
 }
 
+@media (min-width:380px){
+  form{
+    box-shadow: 0px 0px 20px 1px rgba(189, 189, 189, 0.47);
+  }
+}
 @media (min-width:567px){
   form{
     width:70%;

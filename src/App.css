@@ -16,6 +16,13 @@ h2{
   font-weight: 400;
 }
 
+
 .pre-nav-mobile {
   height: 10px;
+}
+
+@media(min-width:378px){
+  .pre-nav-mobile{
+    display: none;
+  }
 }

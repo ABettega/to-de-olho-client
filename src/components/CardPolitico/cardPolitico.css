@@ -78,7 +78,7 @@
   position: static;
 }
 
-.card-slider:hover {
+.div-maior:hover {
   animation: pulse_animation 1s ease;
 }
 

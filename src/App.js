@@ -54,6 +54,7 @@ class App extends Component {
     };
     return (
       <Fragment>
+        <div className="pre-nav-mobile"></div>
         <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
         <Switch>
           <Route exact path='/' render={(props) => <Main {...props} />}></Route>
@@ -65,7 +66,6 @@ class App extends Component {
           <Route path='/senador/:id' render={(props) => <DetailsSenadores {...props} />}></Route>
           <ProtectedRoute path='/dashboard' getUser={this.getTheUser} user={this.state.loggedInUser} component={Dashboard}></ProtectedRoute>
         </Switch>
-        <div className="pre-nav-mobile"></div>
       </Fragment>
     );
   }

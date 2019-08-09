@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import AuthService from "../../components/Auth/auth-services";
 import { Link } from "react-router-dom";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
+import Slider from "../../components/Slider";
 import "./dashboard.css";
 import Axios from "axios";
 
@@ -66,10 +67,11 @@ class Dashboard extends Component {
       <div id="dashboard">
         <div>
           <div id="user">
-            <p>Políticos Observados</p>
+            <p>Tô de Olho Neles</p>
           </div>
         </div>
         <div id="politicians">
+          <Slider>
           {this.state.senadorestodos
             .filter(senador =>
               this.state.senFavoritos.includes(
@@ -84,7 +86,6 @@ class Dashboard extends Component {
                     this.setState({
                       partidosSenadores: [...this.state.partidosSenadores, sen.data.DetalheParlamentar.Parlamentar.FiliacaoAtual.Partido.SiglaPartido]
                     })
-                    // counter += 1;
                   }
                   
                   console.log(this.state.partidosSenadores)
@@ -125,6 +126,9 @@ class Dashboard extends Component {
                 />
               );
             })}
+
+          </Slider>
+         
         </div>
       </div>
       </Fragment>

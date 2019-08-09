@@ -1,8 +1,9 @@
 .form{
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    padding: 20px;
 }
+
 
 .mensagem-erro {
     text-align: center;
@@ -39,5 +40,11 @@
     display: flex;
     justify-content: center;
     align-items:center;
-    height: 100vh;
+    height: 87vh;
+}
+
+@media (min-width:480px){
+    .form{
+        padding:40px;
+    }
 }

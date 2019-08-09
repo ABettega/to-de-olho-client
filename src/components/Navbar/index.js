@@ -29,95 +29,77 @@ class Navbar extends Component {
     if (this.state.loggedInUser === null || this.state.loggedInUser === false) {
       return (
         <nav>
-          <ul className="nav-ul">
-            <li className="">
-              <Link className="nav-a" to="/">
+          <div>
+          <Link className="nav-a" to="/">
                 <div>
                 <div className="eye-animation"></div>
-                <img className="logo" src="/images/logov.png" alt="go"/>
+                <img className="logo desappear" src="/images/logov.png" alt="go"/>
                 </div>
               </Link>
-            </li>
+          </div>
+          <div className="links-nav">
+          <ul className="nav-ul">
             <li>
               <Link className="nav-a" to="/registrar">
-                <div>
-                  {/* <img
-                    id="registrar"
-                    src="./images/user.png"
-                    alt="Imagem para registrar"
-                  /> */}
-                  Registrar
+                <div className="hover-nav desappear">
+                  Cadastre-se
                 </div>
               </Link>
             </li>
             <li>
               <Link className="nav-a" to="/login">
-                <div>
-                  {/* <img
-                    id="login"
-                    src="./images/user.png"
-                    alt="Imagem para login"
-                  /> */}
+                <div className="hover-nav">
                   Login
                 </div>
               </Link>
             </li>
             <li>
               <Link className="nav-a" to="/pesquisar">
-                <div>
-                  {/* <img
-                    id="pesquisar"
-                    src="./images/pesquisar.png"
-                    alt="Imagem para pesquisar"
-                  /> */}
+                <div className="hover-nav">
                   Pesquisar
                 </div>
               </Link>
             </li>
           </ul>
+          </div>
         </nav>
       );
     } else {
       return (
         <nav>
-          <ul className="nav-ul">
-          <li className="">
-              <Link className="nav-a" to="/">
-                <div>
+          <div>
+          <Link className="nav-a" to="/">
+                <div className="hover-nav">
                 <div className="eye-animation"></div>
                 <img className="logo" src="/images/logov.png" alt="go"/>
                 </div>
               </Link>
-            </li>
+          </div>
+          <div className="links-nav">
+          <ul className="nav-ul">
             <li>
               <Link className="nav-a" to="/pesquisar">
-                <div>
-                  {/* <img
-                    id="pesquisar"
-                    src="./images/pesquisar.png"
-                    alt="Imagem para pesquisar"
-                  /> */}
+                <div className="hover-nav">
                   Pesquisar
                 </div>
               </Link>
             </li>
             <li>
               <Link className="nav-a" to="/dashboard">
-                <div>
-                  {/* <img src="./images/home.png" alt="Imagem para dashboard" /> */}
+                <div className="hover-nav desappear">
                   Dashboard
                 </div>
               </Link>
             </li>
             <li>
               <Link className="nav-a" to="/">
-                <div onClick={() => this.logoutUser()}>
-                  {/* <img src="./images/user.png" alt="Imagem para logout" /> */}
-                  Sair
+                <div className="hover-nav" onClick={() =>  this.logoutUser()}>
+                Sair
                 </div>
               </Link>
             </li>
           </ul>
+          </div>
         </nav>
       );
     }

@@ -4,6 +4,7 @@
   display: flex;
   overflow-x: auto;
   padding: 25px 7px;
+  margin-bottom: 50px;
 }
 
 @media (min-width: 912px) {

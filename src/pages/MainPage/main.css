@@ -11,7 +11,7 @@ main{
     align-items: center;
     justify-content: center;
     background-color: white;
-    padding:40px;
+    padding:20px;
 }
 
 h1{
@@ -32,17 +32,28 @@ h3{
 }
 
 .logo-main{
-    widows: 140px;
+    width: 140px;
     height: 140px;
     margin-right: 40px;
 }
 
 .eye-main{
-    width:270px;
+    width: 200px
 }
 
 .div-main{
     display: flex;
     flex-direction: row;
     align-items: center
+}
+
+@media(min-width:572px){
+    .eye-main{
+        width: 270px
+    }
+
+    main{
+        padding:40px;
+    }
+
 }
