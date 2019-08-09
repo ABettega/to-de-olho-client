@@ -13,7 +13,6 @@ class Dashboard extends Component {
       senFavoritos: [],
       deputadostodos: [],
       senadorestodos: [],
-      user: this.props.user
     };
     this.service = new AuthService();
   }

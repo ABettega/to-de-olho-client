@@ -4,6 +4,7 @@ import './detailssenadores.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
 import RadialChart from '../../components/Charts/RadialChartSenadores';
+require('dotenv').config();
 
 class DetailsSenadores extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class DetailsSenadores extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/senadores/${this.props.match.params.id}/sessoes/`)
+    axios.get(`${process.env.REACT_APP_API_URL}/senadores/${this.props.match.params.id}/sessoes/`)
       .then((res) => {
         const {
           nome,
@@ -122,7 +123,7 @@ class DetailsSenadores extends Component {
       })
       .catch(e => console.log(e));
     
-    axios.get(`http://localhost:5000/senadores/historico/sessoes/${this.props.match.params.id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/senadores/historico/sessoes/${this.props.match.params.id}`)
       .then((res) => {
         const {
           nome,
