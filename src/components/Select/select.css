@@ -2,8 +2,20 @@ select{
     padding: 10px 5px;
     margin: 5px;
     background-color: white;
+    border-radius: 5px;
     border-width: 0px;
     color: gray;
     font-size: 16px;
     outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+option{
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select:focus{
+    box-shadow: 0px 0px 10px 1px rgba(189, 189, 189, 0.47)
 }

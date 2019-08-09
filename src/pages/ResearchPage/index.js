@@ -3,32 +3,31 @@ import AuthService from "../../components/Auth/auth-services";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
 import Slider from "../../components/Slider";
 import "./researchpage.css";
-import { debounce } from 'lodash';
 
 class ResearchPage extends Component {
   constructor(props) {
     super(props);
 
-    if (this.props.location.state) {
+    if (this.props.location.state){
       this.state = {
         search: "",
-        deputados: [],
-        senadores: [],
-        filterDeputados: [],
-        filterSenadores: [],
-        senadoresAtuais: [],
-        deputadosAtuais: [],
-        loginMessage: this.props.location.state.loginMessage
+        deputadostodos: [],
+        deputadosatuais:[],
+        senadorestodos: [],
+        senadoresatuais:[],
+        researchdeputados:[],
+        researchsenadores:[],
+        loginMessage: this.props.location.state.loginMessage,
       };
     } else{
       this.state = {
         search: "",
-        deputados: [],
-        senadores: [],
-        filterDeputados: [],
-        filterSenadores: [],
-        senadoresAtuais: [],
-        deputadosAtuais: [],
+        deputadostodos: [],
+        deputadosatuais:[],
+        senadorestodos: [],
+        senadoresatuais:[],
+        researchdeputados:[],
+        researchsenadores:[],
       };
     }
       
@@ -36,31 +35,19 @@ class ResearchPage extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  checkAuto() {
-    if (this.props.user) {
-      this.service.getFavorites(this.props.user.email)
-        .then(ret => {
-          this.setState({
-            favDep: ret.depFavoritos,
-            favSen: ret.senFavoritos
-          })
-        })
-        .catch(err => console.log(err))
-    }
-  }
-
   componentDidMount() {
-    this.checkAuto();
     this.service.deputadosatuais().then(response => {
       this.setState({
-        deputadosAtuais: [...response],
+        researchdeputados: [...response],
+        deputadosatuais: [...response]
       });
     });
     this.service
       .senadoresatuais()
       .then(response => {
         this.setState({
-          senadoresAtuais: [...response],
+          senadoresatuais: [...response],
+          researchsenadores: [...response]
         });
       })
       .catch(err => console.log(err));
@@ -69,41 +56,43 @@ class ResearchPage extends Component {
       .deputadostodos()
       .then(response => {
         this.setState({
-          deputados: [...response],
-          filterDeputados: [...response],
+          deputadostodos: [...response]
         });
       })
       .catch(err => console.log(err));
       
-    this.service
-      .senadorestodos()
+    this.service.senadorestodos()
       .then(response => {
+        console.log(response)
         this.setState({
-          senadores: [...response],
+          senadorestodos: [...response]
         });
       })
       .catch(err => console.log(err));
   }
 
-  setFiltered = debounce(query => {
-    this.setState({
-      filterDeputados: this.state.deputados.filter((deputado) =>
-        deputado.nomeDeputado
-          .toUpperCase()
-          .includes(query.toUpperCase())
-      ),
-      filterSenadores: this.state.senadores.filter((senador) =>
-        senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
-          query.toUpperCase()
-        )
-      )
-    });
-  }, 500);
+  chooseAllorSome() {
+    if (this.state.search === "") {
+      let copyDeputadosAtuais = [...this.state.deputadosatuais]
+      let copySenadoresAtuais = [...this.state.senadoresatuais]
+      this.setState({
+        researchdeputados: copyDeputadosAtuais,
+        researchsenadores: copySenadoresAtuais
+      })
+    } else {
+      let copyDeputadosTodos = [...this.state.deputadostodos]
+      let copySenadoresTodos = [...this.state.senadorestodos]
+      this.setState({
+        researchdeputados: copyDeputadosTodos,
+        researchsenadores: copySenadoresTodos
+      })
+    }
+  }
 
-  handleChange(event) {
+  async handleChange(event) {
     const { value } = event.target;
-    this.setState({search: value});
-    this.setFiltered(value);
+    await this.setState({ search: value });
+    await this.chooseAllorSome()
   }
 
   titleCase(str) {
@@ -129,16 +118,18 @@ class ResearchPage extends Component {
         <div className="center">
           <div className="half-page">
             <img className="congresso-img" src="/images/senado.png" />
-
-            {this.state.search === "" 
-            ? 
-              <Slider>
-              {this.state.senadoresAtuais
+            <Slider>
+              {this.state.researchsenadores
+                .filter(senador =>
+                  senador.IdentificacaoParlamentar.NomeParlamentar.toUpperCase().includes(
+                    this.state.search.toUpperCase()
+                  )
+                )
                 .map(senador => {
                   return (
                     <CardPolitico
+                      key={senador.IdentificacaoParlamentar.CodigoParlamentar}
                       id={senador.IdentificacaoParlamentar.CodigoParlamentar}
-                      siglaPartido={senador.IdentificacaoParlamentar.siglaPartidoParlamentar}
                       politician="/senador/"
                       politicianName={this.titleCase(
                         senador.IdentificacaoParlamentar.NomeParlamentar
@@ -147,80 +138,33 @@ class ResearchPage extends Component {
                       backImage={
                         senador.IdentificacaoParlamentar.UrlFotoParlamentar
                       }
-                      user={this.props.user}
-                      fav={this.state.favSen}
-                      siglaPartido={senador.IdentificacaoParlamentar.SiglaPartidoParlamentar}
                     />
                   );
                 })}
-            </Slider> 
-            : 
-            <Slider>
-            {this.state.filterSenadores
-              .map(senador => {
-                return (
-                  <CardPolitico
-                    id={senador.IdentificacaoParlamentar.CodigoParlamentar}
-                    politician="/senador/"
-                    politicianName={this.titleCase(
-                      senador.IdentificacaoParlamentar.NomeParlamentar
-                    )}
-                    uf={senador.IdentificacaoParlamentar.UfParlamentar || senador.UltimoMandato.UfParlamentar}
-                    backImage={
-                      senador.IdentificacaoParlamentar.UrlFotoParlamentar
-                    }
-                    user={this.props.user}
-                    fav={this.state.favDep}
-                    siglaPartido={senador.IdentificacaoParlamentar.siglaPartidoParlamentar}
-                  />
-                );
-              })}
-          </Slider>
-            }
+            </Slider>
           </div>
           <div className="half-page">
-          <img className="congresso-img" src="./images/deputados.png" />
-
-          {this.state.search === '' 
-          ? 
-          <Slider>
-            {this.state.deputadosAtuais
-              .map(deputado => {
-                return (
-                  <CardPolitico
-                    key={deputado.id}
-                    id={deputado.id}
-                    politician="/deputado/"
-                    politicianName={this.titleCase(deputado.nomeDeputado)}
-                    uf={deputado.siglaUf}
-                    backImage={deputado.urlFoto}
-                    user={this.props.user}
-                    fav={this.state.favDep}
-                    siglaPartido={deputado.siglaPartido}
-                  />
-                );
-              })}
-          </Slider>
-          :
-          <Slider>
-            {this.state.filterDeputados
-              .map(deputado => {
-                return (
-                  <CardPolitico
-                    key={deputado.id}
-                    id={deputado.id}
-                    politician="/deputado/"
-                    politicianName={this.titleCase(deputado.nomeDeputado)}
-                    uf={deputado.siglaUf}
-                    backImage={deputado.urlFoto}
-                    user={this.props.user}
-                    fav={this.state.favDep}
-                    siglaPartido={deputado.siglaPartido}
-                  />
-                );
-              })}
-          </Slider>
-          }
+            <img className="congresso-img" src="/images/deputados.png" />
+            <Slider>
+              {this.state.researchdeputados
+                .filter(deputado =>
+                  deputado.nomeDeputado
+                    .toUpperCase()
+                    .includes(this.state.search.toUpperCase())
+                )
+                .map(deputado => {
+                  return (
+                    <CardPolitico
+                      key={deputado.id}
+                      id={deputado.id}
+                      politician="/deputado/"
+                      politicianName={this.titleCase(deputado.nomeDeputado)}
+                      uf={deputado.siglaUf}
+                      backImage={deputado.urlFoto}
+                    />
+                  );
+                })}
+            </Slider>
           </div>
         </div>
       </>

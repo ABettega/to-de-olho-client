@@ -3,8 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import './detailssenadores.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
-import RadialChart from '../../components/Charts/RadialChartSenadores';
-require('dotenv').config();
+import RadialChart from '../../components/Charts/RadialChart';
 
 class DetailsSenadores extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class DetailsSenadores extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/senadores/${this.props.match.params.id}/sessoes/`)
+    axios.get(`http://localhost:5000/senadores/${this.props.match.params.id}/sessoes/`)
       .then((res) => {
         const {
           nome,
@@ -75,7 +74,7 @@ class DetailsSenadores extends Component {
                 { 
                   angle: res.data.diasEmAP, 
                   label: '' + res.data.diasEmAP, 
-                  subLabel:'Atividade Parlamentar',
+                  subLabel:'Atividades Culturais',
                   style: {
                     fill: '#617888',
                     stroke: 'rgba(0,0,0,0)',
@@ -123,7 +122,7 @@ class DetailsSenadores extends Component {
       })
       .catch(e => console.log(e));
     
-    axios.get(`${process.env.REACT_APP_API_URL}/senadores/historico/sessoes/${this.props.match.params.id}`)
+    axios.get(`http://localhost:5000/senadores/historico/sessoes/${this.props.match.params.id}`)
       .then((res) => {
         const {
           nome,
@@ -186,7 +185,7 @@ class DetailsSenadores extends Component {
               { 
                 angle: res.data.historico.diasEmAP, 
                 label: '' + res.data.historico.diasEmAP, 
-                subLabel:'Atividade Parlamentar',
+                subLabel:'Atividades Culturais',
                 style: {
                   fill: '#617888',
                   stroke: 'rgba(0,0,0,0)',
@@ -257,10 +256,11 @@ class DetailsSenadores extends Component {
          {(this.state.atual || this.state.historico) ?
           <div>
             <div className="politician-info-container">
-              <img src={this.state.UrlFotoParlamentar} alt={`Foto do senador ${this.state.nome}`} />
+              <img src={this.state.UrlFotoParlamentar} alt={`Foto do deputado ${this.state.nome}`} />
               <div className="politician-info">
-                <p>{this.state.nome}</p>
-                <p>{this.state.sigla} - {this.state.uf}</p>
+                <p>Nome: {this.state.nome}</p>
+                <p>Partido: {this.state.sigla}</p>
+                <p>UF: {this.state.uf}</p>
               </div>
             </div>
             {this.state.atual.totalDeSessoes !== 0 &&
@@ -290,20 +290,11 @@ class DetailsSenadores extends Component {
               <div className='legis-container'>
 
               {
-                (this.state.historico.mandatos.dataFim === undefined || this.state.historico.mandatos.dataFim.length < 1) ?
+                (this.state.historico.mandatos.dataFim === undefined) ?
                 <p className="legis-text"><span>Histórico de legislaturas: Primeira legislatura</span>
                 <br></br></p> :
                 <p className="legis-text"><span>Histórico de legislaturas: </span><br></br>
-                {Object.values(this.state.historico.mandatos).map(legis => {
-                  console.log(typeof legis[0], typeof legis[1])
-                  if (legis[0] !== null && typeof legis[1] === 'string') {
-                    return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `
-                  }
-                })} {this.state.historico.mandatos.dataInicio.slice(-1)[0].slice(0, 4)} - 
-                { typeof this.state.historico.mandatos.dataFim.slice(-1)[0] === 'string' ?
-                  this.state.historico.mandatos.dataFim.slice(-1)[0].slice(0, 4) :
-                  ''
-                }</p>
+                {Object.values(this.state.historico.mandatos).map(legis => {return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `})} {this.state.historico.mandatos.dataInicio.slice(-1)[0].slice(0, 4)} - {this.state.historico.mandatos.dataFim.slice(-1)[0].slice(0, 4)}</p>
               }
               </div>
               <div className="charts-container">

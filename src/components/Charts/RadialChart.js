@@ -8,7 +8,7 @@ const RChart = (props) => {
     onValueClick={(dp, e) => props.handleChartClick(dp, props.legis)}
     data={props.data}
     labelsRadiusMultiplier={1.6}
-    width={300}
+    width={250}
     height={300}
     padAngle={0.04}
     center={{x: 0, y: 0}}>

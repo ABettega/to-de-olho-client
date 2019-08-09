@@ -1,23 +1,17 @@
 .politician-info-container {
   display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
+  flex-flow: row wrap;
   padding: 20px;
 }
 
 .politician-info-container img {
-  min-width: 300px;
-  max-width: 20vw;
-  height: auto;
+  height: 180px;
+  width: 130px;
 }
 
 .politician-info {
   margin: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.2rem;
-  text-align: center;
+  font-size: 0.8rem;
 }
 
 .politician-info p{

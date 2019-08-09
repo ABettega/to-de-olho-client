@@ -6,7 +6,7 @@ import "./login.css";
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { password: '', email: '' };
+    this.state = { password: "", email: "" };
     this.service = new AuthService();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -14,39 +14,37 @@ class LoginForm extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    const {
-      password,
-      email,
-    } = this.state;
+    const { password, email } = this.state;
 
     if (this.validaEmail(email)) {
-      if (password !== '' && email !== '') {
-        this.service.login(email, password)
+      if (password !== "" && email !== "") {
+        this.service
+          .login(email, password)
           .then(response => {
             if (response.error === true) {
               this.setState({
                 error: true,
-                errorMessage: 'Usuário ou senha incorretos!'
+                errorMessage: "Usuário ou senha incorretos!"
               });
             } else {
-              this.props.getUser(response)
+              this.props.getUser(response);
               this.props.history.push({
-                pathname: '/pesquisar',
-                state: {loginMessage: 'Obrigado por fazer o login!'}
+                pathname: "/pesquisar",
+                state: { loginMessage: "Obrigado por fazer o login!" }
               });
             }
           })
-          .catch(e => console.log('e'));
+          .catch(e => console.log("e"));
       } else {
         this.setState({
           error: true,
-          errorMessage: 'Todos os dados precisam ser preenchidos!',
+          errorMessage: "Todos os dados precisam ser preenchidos!"
         });
-      }        
+      }
     } else {
       this.setState({
         error: true,
-        errorMessage: 'O email digitado é inválido!',
+        errorMessage: "O email digitado é inválido!"
       });
     }
   }
@@ -62,32 +60,36 @@ class LoginForm extends Component {
   }
 
   render() {
-    let erro = '';
+    let erro = "";
     if (this.state.error === true) {
       erro = this.state.errorMessage;
     }
     return (
-      <form onSubmit={e => this.handleFormSubmit(e)} className="form">
-        <h1>Login</h1>
-        <Input
-          required='true'
-          type="text"
-          name="email"
-          placeholder="Endereço de E-mail"
-          change={e => this.handleChange(e)}
-          value={this.state.email}
-        />
-        <Input
-          required='true'
-          type="password"
-          name="password"
-          placeholder="Senha"
-          change={e => this.handleChange(e)}
-          value={this.state.password}
-        />
-        <button className="button-a ligth-green" type="submit">Login</button>
-        <label className="mensagem-erro">{erro}</label>
-      </form>
+      <div className="div-login">
+        <form onSubmit={e => this.handleFormSubmit(e)} className="form">
+          <h1>Login</h1>
+          <Input
+            required="true"
+            type="text"
+            name="email"
+            placeholder="Endereço de E-mail"
+            change={e => this.handleChange(e)}
+            value={this.state.email}
+          />
+          <Input
+            required="true"
+            type="password"
+            name="password"
+            placeholder="Senha"
+            change={e => this.handleChange(e)}
+            value={this.state.password}
+          />
+          <button className="button-a ligth-green" type="submit">
+            Login
+          </button>
+          <label className="mensagem-erro">{erro}</label>
+        </form>
+      </div>
     );
   }
 }

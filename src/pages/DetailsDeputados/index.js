@@ -3,7 +3,7 @@ import AuthService from "../../components/Auth/auth-services";
 import './detailsdeputados.css';
 import axios from 'axios';
 import LoadingIcon from "../../components/LoadingIcon";
-import RadialChart from '../../components/Charts/RadialChartSenadores';
+import RadialChart from '../../components/Charts/RadialChart';
 import MessageAttach from '../../components/MessageBox/MessageAttach';
 
 class DetailsDeputados extends Component {
@@ -26,18 +26,14 @@ class DetailsDeputados extends Component {
   
   dateToShow = (date) => {
     const arr = date.split('-');
+    // return [arr[2], arr[1], arr[0]].join('/');
     return arr[0];
-  }
-
-  dateWithBars = (date) => {
-    const arr = date.split('-');
-    return [arr[2], arr[1], arr[0]].join('/');
   }
   
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/atual`)
+    axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}/atual`)
     .then(politicianAtual => {
-      if (politicianAtual.data.nomeDeputado !== undefined) {
+      if (politicianAtual.data) {
         const { sessoes, votos, nomeDeputado, partido, uf, foto, legislatura } = politicianAtual.data;
         this.setState({
           politicianName: this.toTitleCase(nomeDeputado),
@@ -56,52 +52,28 @@ class DetailsDeputados extends Component {
               { angle: sessoes.total - sessoes.presente, 
                 label: '' + (sessoes.total - sessoes.presente), 
                 subLabel:'Ausência',
-                // radius: 1.2,
                 style: {
-                  fill: '#AB4263',
-                  stroke: 'rgba(0,0,0,0)',
+                  fill: 'rgba(0, 0, 0, 0)',
                 }
               },
               { angle: sessoes.presente, 
                 label: '' + sessoes.presente, 
-                subLabel:'Presença',
-                style: {
-                  fill: '#876DB3',
-                  stroke: 'rgba(0,0,0,0)',
-                }
-              },
+                subLabel:'Presença'},
             ],
             votacoes: [
               { angle: votos.totalDeVotos, 
                 label: '' + votos.totalDeVotos, 
                 subLabel:'Votos',
-                style: {
-                  fill: '#876DB3',
-                  stroke: 'rgba(0,0,0,0)',
-                }
               },
               { angle: votos.obstrucao, 
                 label: '' + votos.obstrucao, 
-                subLabel:'Obstrução',
-                style: {
-                  fill: '#FAC438',
-                  stroke: 'rgba(0,0,0,0)',
-                }
+                subLabel:'Obstrução'
               },
-              { angle: votos.abstencao, 
-                label: '' + votos.abstencao, 
-                subLabel:'Abstenção',
-                style: {
-                  fill: '#66AB6D',
-                  stroke: 'rgba(0,0,0,0)',
-                }
-              },
-              { angle: votos.totalDeVotacoes - votos.obstrucao - votos.abstencao - votos.totalDeVotos, 
-                label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.abstencao - votos.totalDeVotos), 
+              { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
+                label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
                 subLabel:'Não registrou voto',
                 style: {
-                  fill: '#6EBCCC',
-                  stroke: 'rgba(0,0,0,0)',
+                  fill: 'rgba(0, 0, 0, 0)',
                 }
               },
             ],
@@ -110,7 +82,6 @@ class DetailsDeputados extends Component {
               sim: votos.sim,
               nao: votos.nao,
               obstrucao: votos.obstrucao,
-              abstencao: votos.abstencao,
               art17: votos.art17,
               totalDeVotos: votos.totalDeVotos,
               totalDeVotacoes: votos.totalDeVotacoes,
@@ -122,9 +93,8 @@ class DetailsDeputados extends Component {
     })
     .catch(e => console.log(e));
     
-    axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/historico`)
+    axios.get(`http://localhost:5000/deputados/sessoes/${this.props.match.params.id}/historico`)
     .then(politicianHist => {
-      console.log(politicianHist);
       const { legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto } = politicianHist.data;
       this.setState({
         politicianName: this.toTitleCase(nomeDeputado),
@@ -142,7 +112,6 @@ class DetailsDeputados extends Component {
             sim: votos.sim,
             nao: votos.nao,
             obstrucao: votos.obstrucao,
-            abstencao: votos.abstencao,
             art17: votos.art17,
             totalDeVotos: votos.totalDeVotos,
             totalDeVotacoes: votos.totalDeVotacoes,
@@ -154,50 +123,27 @@ class DetailsDeputados extends Component {
               label: '' + (sessoes.total - sessoes.presente), 
               subLabel:'Ausência',
               style: {
-                fill: '#AB4263',
-                stroke: 'rgba(0,0,0,0)',
+                fill: 'rgba(0, 0, 0, 0)',
               }
             },
             { angle: sessoes.presente, 
               label: '' + sessoes.presente, 
-              subLabel:'Presença',
-              style: {
-                fill: '#876DB3',
-                stroke: 'rgba(0,0,0,0)',
-              }
-            },
+              subLabel:'Presença'},
           ],
           votacoes: [
             { angle: votos.totalDeVotos, 
               label: '' + votos.totalDeVotos, 
               subLabel:'Votos',
-              style: {
-                fill: '#876DB3',
-                stroke: 'rgba(0,0,0,0)',
-              }
             },
             { angle: votos.obstrucao, 
               label: '' + votos.obstrucao, 
-              subLabel:'Obstrução',
-              style: {
-                fill: '#FAC438',
-                stroke: 'rgba(0,0,0,0)',
-              }
+              subLabel:'Obstrução'
             },
-            { angle: votos.abstencao, 
-              label: '' + votos.abstencao, 
-              subLabel:'Abstenção',
-              style: {
-                fill: '#66AB6D',
-                stroke: 'rgba(0,0,0,0)',
-              }
-            },
-            { angle: votos.totalDeVotacoes - votos.obstrucao - votos.abstencao - votos.totalDeVotos, 
-              label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.abstencao - votos.totalDeVotos), 
+            { angle: votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos, 
+              label: '' + (votos.totalDeVotacoes - votos.obstrucao - votos.totalDeVotos), 
               subLabel:'Não registrou voto',
               style: {
-                fill: '#6EBCCC',
-                stroke: 'rgba(0,0,0,0)',
+                fill: 'rgba(0, 0, 0, 0)',
               }
             },
           ],
@@ -215,7 +161,6 @@ class DetailsDeputados extends Component {
         if(legis === 'atual') {
           this.service.sessoesPresentesDeputados('atual', 'votos', this.state.politicianName, [this.state.atual.legislatura])
           .then(res => {
-            console.log(res);
             this.setState({
               messageBox: `Lista de votações em que o parlamentar votou:`,
               sessoesPresenca: res,  
@@ -269,25 +214,6 @@ class DetailsDeputados extends Component {
           });
         }
         break;
-      case 'Abstenção':
-        if(legis === 'atual') {
-          this.service.sessoesPresentesDeputados('atual', 'abstencao', this.state.politicianName, [this.state.atual.legislatura])
-          .then(res => {
-            this.setState({
-              messageBox: `Lista de votações em que o parlamentar se absteve:`,
-              sessoesPresenca: res,  
-            });
-          });
-        } else if (legis === 'historico') {
-          this.service.sessoesPresentesDeputados('historico', 'abstencao', this.state.politicianName, this.state.historico.legislaturas)
-          .then(res => {
-            this.setState({
-              messageBox: `Lista de votações em que o parlamentar se absteve:`,
-              sessoesPresenca: res,  
-            });
-          });
-        }
-        break;  
       case 'Presença':
         if(legis === 'atual') {
           this.service.sessoesPresentesDeputados('atual', 'presenca', this.state.politicianName, [this.state.atual.legislatura])
@@ -344,7 +270,7 @@ class DetailsDeputados extends Component {
     const {atual, historico} = this.state;
     return (
       <Fragment>
-        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title={this.state.messageBox} sessoesPresenca={this.state.sessoesPresenca} handleCancelMessageBox={() => this.handleCancelMessageBox()} dateWithBars={(date) => this.dateWithBars(date)} />}
+        { this.state.showVotes && <MessageAttach handleChartClick={() => this.handleChartClick()} title={this.state.messageBox} sessoesPresenca={this.state.sessoesPresenca} handleCancelMessageBox={() => this.handleCancelMessageBox()}/>}
         {(this.state.atual || this.state.historico) ?
           <div>
             <div className="politician-info-container">
@@ -372,7 +298,6 @@ class DetailsDeputados extends Component {
                 </div>
                 <div className="presenca-sessoes-container">
                   <p>Presença em votações</p>
-                  {console.log(atual)}
                   <RadialChart
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.votos.percentualDeVotos}
