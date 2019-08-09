@@ -5,39 +5,27 @@
     background-size: cover;
 }
 
-.add-poli {
-  appearance: none;
-  position: absolute;
-  width: 35px;
-  height: 60px;
-  top: 0;
-  right: 0;
-  padding-right: 5px;
-  background-image: url('/images/favorite-unchecked.png');
-  background-size: 35px 60px;
-  background-repeat: no-repeat;
-  opacity: 0.9;
-}
-
-.add-poli:checked {
-  background-image: url('/images/favorite-checked.png');
-}
-
-.add-poli:hover {
-  animation: pulse_favorite 1s ease;
-}
-
 .card-politician-horizontal {
   width: 350px;
   height: 200px;
   margin: 10px 8px;
   box-shadow: 0px 0px 20px 1px rgba(189, 189, 189, 0.47);
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
 #user p{
     font-size: 28px;
+}
+
+.card {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .politician-information{
@@ -63,3 +51,12 @@
   margin-bottom: 90px;
   margin-top:40px;
 }
+
+#politicians {
+  margin-top: 40px;
+  width: 90vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+

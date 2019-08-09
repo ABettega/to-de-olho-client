@@ -17,10 +17,12 @@ main{
 }
 
 h1{
-    font-family: 'Merienda', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: initial;
     font-size: 50px;
     color:white;
     padding-bottom: 15px;
+    /* width: 150px; */
 }
 
 h3{
