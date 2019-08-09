@@ -22,7 +22,7 @@ class Main extends Component {
     return (
       <Fragment>
         <main>
-          <h1 className="white">Tô de Olho</h1>
+          <h1 className="white">tô de olho</h1>
           <h3>A plataforma para você acompanhar de perto os seus políticos</h3>
         </main>
         <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>

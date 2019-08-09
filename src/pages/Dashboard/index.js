@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import AuthService from "../../components/Auth/auth-services";
 import { Link } from "react-router-dom";
 import CardPolitico from "../../components/CardPolitico/CardPolitico";
@@ -13,7 +13,6 @@ class Dashboard extends Component {
       senFavoritos: [],
       deputadostodos: [],
       senadorestodos: [],
-      user: this.props.user
     };
     this.service = new AuthService();
   }
@@ -21,6 +20,8 @@ class Dashboard extends Component {
   componentDidMount() {
     this.service.loggedin().then(response => {
       let { firstName, depFavoritos, senFavoritos } = response;
+
+      console.log(depFavoritos, senFavoritos)
 
       this.setState({
         username: firstName,
@@ -58,14 +59,14 @@ class Dashboard extends Component {
 
   render() {
     return (
+      <Fragment>
       <div id="dashboard">
         <div>
           <div id="user">
-            <p>{this.state.username}</p>
-            <a href="#">Editar</a>
+            <p>Políticos Observados</p>
           </div>
         </div>
-        <div>
+        <div id="politicians">
           {this.state.senadorestodos
             .filter(senador =>
               this.state.senFavoritos.includes(
@@ -75,6 +76,7 @@ class Dashboard extends Component {
             .map(senador => {
               return (
                 <CardPolitico
+                  className="card-politician-horizontal"
                   key={senador.IdentificacaoParlamentar.CodigoParlamentar}
                   id={senador.IdentificacaoParlamentar.CodigoParlamentar}
                   politician="/senador/"
@@ -85,8 +87,6 @@ class Dashboard extends Component {
                   backImage={
                     senador.IdentificacaoParlamentar.UrlFotoParlamentar
                   }
-                  className="add-poli"
-                  user={this.state.user}
                 />
               );
             })}
@@ -97,19 +97,19 @@ class Dashboard extends Component {
             .map(deputado => {
               return (
                 <CardPolitico
-                  className="card-politician-horizontal add-poli"
+                  className="card-politician-horizontal"
                   key={deputado.id}
                   id={deputado.id}
                   politician="/deputado/"
                   politicianName={this.titleCase(deputado.nomeDeputado)}
                   uf={deputado.siglaUf}
                   backImage={deputado.urlFoto}
-                  user={this.state.user}
                 />
               );
             })}
         </div>
       </div>
+      </Fragment>
     );
   }
 }
