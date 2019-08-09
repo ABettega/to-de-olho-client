@@ -78,7 +78,6 @@ class ResearchPage extends Component {
     this.service
       .senadorestodos()
       .then(response => {
-        console.log(response)
         this.setState({
           senadores: [...response],
         });
