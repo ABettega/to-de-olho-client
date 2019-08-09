@@ -75,7 +75,7 @@ class DetailsSenadores extends Component {
                 { 
                   angle: res.data.diasEmAP, 
                   label: '' + res.data.diasEmAP, 
-                  subLabel:'Atividades Culturais',
+                  subLabel:'Atividade Parlamentar',
                   style: {
                     fill: '#617888',
                     stroke: 'rgba(0,0,0,0)',
@@ -186,7 +186,7 @@ class DetailsSenadores extends Component {
               { 
                 angle: res.data.historico.diasEmAP, 
                 label: '' + res.data.historico.diasEmAP, 
-                subLabel:'Atividades Culturais',
+                subLabel:'Atividade Parlamentar',
                 style: {
                   fill: '#617888',
                   stroke: 'rgba(0,0,0,0)',
