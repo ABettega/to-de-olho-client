@@ -3,7 +3,6 @@ import Input from "../../components/Input";
 import AuthService from "../../components/Auth/auth-services";
 import Button from "../../components/AButton";
 import Select from "../../components/Select";
-import { Link } from "react-router-dom";
 import "./form.css";
 
 class Form extends Component {
@@ -106,9 +105,8 @@ class Form extends Component {
       erro = this.state.errorMessage;
     }
     return (
-      <div className="div-login">
       <form onSubmit={e => this.handleFormSubmit(e)} className="form">
-        <h1>Cadastre-se</h1>
+        <h1>Sign Up</h1>
         <Input
           type="text"
           name="email"
@@ -190,10 +188,7 @@ class Form extends Component {
         />
         <button className="button-a ligth-green" type="submit">Submit</button>
         <label className='mensagem-erro'>{erro}</label>
-        <hr></hr>
-        <p>Já tem uma conta? <Link></Link></p>
       </form>
-      </div>
     );
   }
 }
