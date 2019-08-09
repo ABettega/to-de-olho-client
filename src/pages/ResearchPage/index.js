@@ -17,7 +17,7 @@ class ResearchPage extends Component {
         senadoresatuais:[],
         researchdeputados:[],
         researchsenadores:[],
-        loginMessage: this.props.location.state.loginMessage
+        loginMessage: this.props.location.state.loginMessage,
       };
     } else{
       this.state = {
@@ -63,6 +63,7 @@ class ResearchPage extends Component {
       
     this.service.senadorestodos()
       .then(response => {
+        console.log(response)
         this.setState({
           senadorestodos: [...response]
         });

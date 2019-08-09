@@ -9,7 +9,9 @@ class CardPolitico extends Component {
 
     this.state={
       isChecked:false,
-      politician:""
+      politician:"",
+      depFavoritos:[],
+      senFavoritos:[]
     }
     this.service = new AuthService();
     this.handleChecked = this.handleChecked.bind(this)
@@ -20,6 +22,13 @@ class CardPolitico extends Component {
     this.setState({
       politician: this.props.politician
     })
+    this.service.loggedin().then(response => {
+      let { depFavoritos, senFavoritos } = response;
+      this.setState({
+        depFavoritos: depFavoritos,
+        senFavoritos: senFavoritos
+      });
+    });
   }
 
   handleChecked(){
@@ -30,7 +39,6 @@ class CardPolitico extends Component {
 
   handlePolitician(){
     if(this.state.isChecked){
-      console.log(this.props.id,this.props.politician)
       this.service.addpolitician(this.props.id,this.props.politician)
       .then(response => console.log(response))
       .catch(err => console.log(err))
@@ -40,7 +48,6 @@ class CardPolitico extends Component {
       .catch(err => console.log(err))
     }
   }
-
 
   render(){
     return (
@@ -55,7 +62,7 @@ class CardPolitico extends Component {
           <p>{this.props.uf}</p>
         </div>
       </div></Link>
-      <input className="add-poli" onChange={this.handleChecked} type="checkbox"></input>
+      <input className="add-poli" value={this.state.isChecked} onChange={this.handleChecked} type="checkbox"></input>
       </div>
       </>
     );

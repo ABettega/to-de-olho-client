@@ -21,13 +21,24 @@ class Main extends Component {
   render() {
     return (
       <Fragment>
+    
         <main>
+          <img className="gif"src="/images/sprite.gif" alt="Logo Tô de Olho"></img>
           <h1 className="white">Tô de Olho</h1>
           <h3>A plataforma para você acompanhar de perto os seus políticos</h3>
         </main>
         <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
         <Slider>
-          <CardPolitico />
+        <CardPolitico
+                      key={5894}
+                      id={5894}
+                      politician="/senador/"
+                      politicianName={
+                       "Flávio Bolsonaro"
+                      }
+                      uf="RJ"
+                      backImage="http://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg"
+                    />
           <CardPolitico />
           <CardPolitico />
           <CardPolitico />

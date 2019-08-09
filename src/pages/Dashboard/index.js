@@ -6,7 +6,6 @@ import "./dashboard.css";
 
 class Dashboard extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       username: "",
@@ -21,7 +20,6 @@ class Dashboard extends Component {
   componentDidMount() {
     this.service.loggedin().then(response => {
       let { firstName, depFavoritos, senFavoritos } = response;
-      console.log(response);
       this.setState({
         username: firstName,
         depFavoritos: depFavoritos,
@@ -40,6 +38,7 @@ class Dashboard extends Component {
     this.service
       .senadorestodos()
       .then(response => {
+        console.log(response)
         this.setState({
           senadorestodos: [...response]
         });
