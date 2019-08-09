@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AuthService from "../../components/Auth/auth-services";
 import './cardPolitico.css'
+// import { url } from "inspector";
 
 class CardPolitico extends Component {
   constructor(props){
@@ -50,18 +51,20 @@ class CardPolitico extends Component {
   render(){
     return (
       <Fragment>
-        <div className="div-maior">
-        <Link className="card-slider" to={this.props.politician + this.props.id}>
-          <div className="size-100">
-          <div style={{backgroundImage: `url(${this.props.backImage})`}} className="card"/>
-          <div className="partido"></div>
-          <div className="names">
+      <div className="div-maior">
+      <Link className="card-slider" to={this.props.politician + this.props.id}>
+        <div className="size-100">
+        <div style={{backgroundImage: `url(${this.props.backImage})`}} className="card"/>
+        <div className="partido"><img className="partido-img" src={`/images/partidos/${this.props.siglaPartido}.png`} /></div>
+        <div className="names">
+          <div className="polit-name-text">
             <p>{this.props.politicianName}</p>
             <p>{this.props.uf}</p>
           </div>
-        </div></Link>
-        {(this.state.user) && <input className="add-poli" checked={this.state.isChecked} onChange={this.handleChecked} type="checkbox"></input>}
         </div>
+      </div></Link>
+      {(this.state.user) && <input className="add-poli" checked={this.state.isChecked} onChange={this.handleChecked} type="checkbox"></input>}
+      </div>
       </Fragment>
     );
   }

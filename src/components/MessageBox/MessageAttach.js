@@ -38,7 +38,7 @@ export default function DraggableDialog(props) {
               if (sessao.nomeDaSessao) {
                 return <li>{sessao.nomeDaSessao}</li>
               } else if (sessao.documento) {
-                return <li><a href={`/deputado/votacao/${sessao._id}`}>{props.dateWithBars(sessao.dataInicio.slice(0, 10))}: <span>{sessao.documento.siglaTipo} {sessao.documento.numero}/{sessao.documento.ano}</span> - {sessao.proposicao}</a></li>
+                return <li><a className="link-to-votes" href={`/deputado/votacao/${sessao._id}`}>{props.dateWithBars(sessao.dataInicio.slice(0, 10))}: <span>{sessao.documento.siglaTipo} {sessao.documento.numero}/{sessao.documento.ano}</span> - {sessao.proposicao}</a></li>
               }
             }) :
             <div className="loading-icon-container-msg">

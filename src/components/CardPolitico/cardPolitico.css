@@ -86,9 +86,19 @@
   width: 15vw;
   height: 15vw;
   border-radius: 50%;
-  border: 5px solid white;
+  /* border: 3px solid #DDD; */
+  box-shadow: 2px 2px 12px #AAA;
+  background-color: white;
   position: relative;
   top: -36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partido-img {
+  width: 70%;
+  height: auto;
 }
 
 .names a {

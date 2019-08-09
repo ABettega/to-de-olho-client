@@ -138,6 +138,7 @@ class ResearchPage extends Component {
                   return (
                     <CardPolitico
                       id={senador.IdentificacaoParlamentar.CodigoParlamentar}
+                      siglaPartido={senador.IdentificacaoParlamentar.siglaPartidoParlamentar}
                       politician="/senador/"
                       politicianName={this.titleCase(
                         senador.IdentificacaoParlamentar.NomeParlamentar
