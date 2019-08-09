@@ -149,6 +149,7 @@ class ResearchPage extends Component {
                       }
                       user={this.props.user}
                       fav={this.state.favSen}
+                      siglaPartido={senador.IdentificacaoParlamentar.SiglaPartidoParlamentar}
                     />
                   );
                 })}
@@ -169,7 +170,8 @@ class ResearchPage extends Component {
                       senador.IdentificacaoParlamentar.UrlFotoParlamentar
                     }
                     user={this.props.user}
-                      fav={this.state.favDep}
+                    fav={this.state.favDep}
+                    siglaPartido={senador.IdentificacaoParlamentar.siglaPartidoParlamentar}
                   />
                 );
               })}
@@ -194,6 +196,7 @@ class ResearchPage extends Component {
                     backImage={deputado.urlFoto}
                     user={this.props.user}
                     fav={this.state.favDep}
+                    siglaPartido={deputado.siglaPartido}
                   />
                 );
               })}
@@ -212,6 +215,7 @@ class ResearchPage extends Component {
                     backImage={deputado.urlFoto}
                     user={this.props.user}
                     fav={this.state.favDep}
+                    siglaPartido={deputado.siglaPartido}
                   />
                 );
               })}
