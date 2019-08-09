@@ -22,10 +22,13 @@ class Main extends Component {
     return (
       <Fragment>
         <main>
-          <h1 className="white">tô de olho</h1>
+          <div className="div-main">
+            <img className="eye-main" src="/images/sprite.gif"></img>
+            <img className="logo-main" src="/images/logov.png"></img>
+          </div>
           <h3>A plataforma para você acompanhar de perto os seus políticos</h3>
+          <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
         </main>
-        <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
         <Slider>
         <CardPolitico 
           id='945'
@@ -60,7 +63,6 @@ class Main extends Component {
           siglaPartido='PSOL'
         />
         </Slider>
-        <Button class="ligth-green" to="/pesquisar">COMO FUNCIONA ?</Button>
       </Fragment>
     );
   }

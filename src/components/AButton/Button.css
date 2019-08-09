@@ -3,11 +3,11 @@
 }
 
 .ligth-green:hover{
-    background-color:  #2da661
+    background-color:  #4bbf5b
 }
 
 .ligth-green:active{
-    background-color:  #2da661
+    background-color:  #4bbf5b
 }
 
 .button-a{
@@ -20,4 +20,6 @@
     font-weight: 700;
     font-size: 16px;
     text-decoration: none;
+    margin: 20px 0 5px 0;
+
 }

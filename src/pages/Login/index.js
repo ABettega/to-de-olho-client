@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "../../components/Input";
 import AuthService from "../../components/Auth/auth-services";
+import { Link } from "react-router-dom";
 import "./login.css";
 
 class LoginForm extends Component {
@@ -88,6 +89,8 @@ class LoginForm extends Component {
             Login
           </button>
           <label className="mensagem-erro">{erro}</label>
+          <hr className="hr-signup"></hr>
+         <p className="already-account">Ainda não tem uma conta? <Link to="/registrar">Cadastre-se</Link></p>
         </form>
       </div>
     );

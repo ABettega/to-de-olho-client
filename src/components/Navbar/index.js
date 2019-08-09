@@ -34,18 +34,18 @@ class Navbar extends Component {
               <Link className="nav-a" to="/">
                 <div>
                 <div className="eye-animation"></div>
-                  Tô de Olho
+                <img className="logo" src="/images/logov.png" alt="go"/>
                 </div>
               </Link>
             </li>
             <li>
               <Link className="nav-a" to="/registrar">
                 <div>
-                  <img
+                  {/* <img
                     id="registrar"
                     src="./images/user.png"
                     alt="Imagem para registrar"
-                  />
+                  /> */}
                   Registrar
                 </div>
               </Link>
@@ -53,11 +53,11 @@ class Navbar extends Component {
             <li>
               <Link className="nav-a" to="/login">
                 <div>
-                  <img
+                  {/* <img
                     id="login"
                     src="./images/user.png"
                     alt="Imagem para login"
-                  />
+                  /> */}
                   Login
                 </div>
               </Link>
@@ -65,11 +65,11 @@ class Navbar extends Component {
             <li>
               <Link className="nav-a" to="/pesquisar">
                 <div>
-                  <img
+                  {/* <img
                     id="pesquisar"
                     src="./images/pesquisar.png"
                     alt="Imagem para pesquisar"
-                  />
+                  /> */}
                   Pesquisar
                 </div>
               </Link>
@@ -81,17 +81,11 @@ class Navbar extends Component {
       return (
         <nav>
           <ul className="nav-ul">
-            <li>
+          <li className="">
               <Link className="nav-a" to="/">
-                <div className="eye-animation"></div>
-                <div className="logo-home">Tô de Olho</div>
-              </Link>
-            </li>
-            <li>
-              <Link className="nav-a home" to="/">
                 <div>
-                  {/* <img src="./images/home.png" alt="Imagem para home" /> */}
-                  Home
+                <div className="eye-animation"></div>
+                <img className="logo" src="/images/logov.png" alt="go"/>
                 </div>
               </Link>
             </li>
