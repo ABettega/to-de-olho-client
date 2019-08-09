@@ -215,6 +215,7 @@ class DetailsDeputados extends Component {
         if(legis === 'atual') {
           this.service.sessoesPresentesDeputados('atual', 'votos', this.state.politicianName, [this.state.atual.legislatura])
           .then(res => {
+            console.log(res);
             this.setState({
               messageBox: `Lista de votações em que o parlamentar votou:`,
               sessoesPresenca: res,  

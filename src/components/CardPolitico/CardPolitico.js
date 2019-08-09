@@ -28,13 +28,6 @@ class CardPolitico extends Component {
       politician: this.props.politician,
       isChecked: isChecked
     })
-    this.service.loggedin().then(response => {
-      let { depFavoritos, senFavoritos } = response;
-      this.setState({
-        depFavoritos: depFavoritos,
-        senFavoritos: senFavoritos
-      });
-    });
   }
 
   handleChecked(){
