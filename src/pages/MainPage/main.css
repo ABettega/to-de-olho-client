@@ -11,7 +11,7 @@ main{
     align-items: center;
     justify-content: center;
     background-color: white;
-    height: 260px;
+    padding:40px;
 }
 
 h1{
@@ -23,10 +23,26 @@ h1{
 }
 
 h3{
-    color:white;
+    color:#4bbf5b;
     text-align: center;
 }
 
 .gif{
     width:180px;
+}
+
+.logo-main{
+    widows: 140px;
+    height: 140px;
+    margin-right: 40px;
+}
+
+.eye-main{
+    width:270px;
+}
+
+.div-main{
+    display: flex;
+    flex-direction: row;
+    align-items: center
 }

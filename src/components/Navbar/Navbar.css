@@ -11,6 +11,11 @@ nav {
   box-shadow: 0px 0px 12px 1px rgba(189, 189, 189, 0.47);
 }
 
+.logo{
+  width: 57px;
+  height: 57px;
+}
+
 nav::before {
   display: block;
   content: " ";
@@ -37,10 +42,15 @@ nav div {
   align-items: center;
 }
 
+.nav-ul li {
+  padding: 0 40px;
+}
+
 .nav-a {
   text-decoration: none;
   color: #4bbf5b;
   font-weight: 700;
+  padding-left: 50px;
 }
 
 .logo-home {
@@ -50,10 +60,9 @@ nav div {
 
 @media (min-width: 576px) {
   nav {
-    position: static;
+    position: relative;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
     height: 60px;
   }
 

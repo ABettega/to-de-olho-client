@@ -100,13 +100,27 @@ class Form extends Component {
     }
   }
 
+  countNumbers(num1,num2){
+    let arrNumbers=[]
+    if(num1<num2){
+      for(let i = num1; i<=num2; i+=1){
+        arrNumbers.push(i)
+      }
+    } else{
+      for(let i = num1; i>=num2; i-=1){
+        arrNumbers.push(i)
+      }
+    }
+    return arrNumbers
+  }
+
   render() {
     let erro = '';
     if (this.state.error === true) {
       erro = this.state.errorMessage;
     }
     return (
-      <div className="div-login">
+      <div className="div-signup">
       <form onSubmit={e => this.handleFormSubmit(e)} className="form">
         <h1>Cadastre-se</h1>
         <Input
@@ -141,11 +155,11 @@ class Form extends Component {
           value={this.state.gender}
           required='true'
         />
-        <div>
+        <div className="birthday">
           <Select
             name="day"
             placeholder="Dia"
-            options={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]}
+            options={this.countNumbers(1,31)}
             change={e => this.handleChange(e)}
             value={this.state.day}
             required='true'
@@ -174,7 +188,7 @@ class Form extends Component {
           <Select
             name="year"
             placeholder="Ano"
-            options={[2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995]}
+            options={this.countNumbers(2003, 1920)}
             change={e => this.handleChange(e)}
             value={this.state.year}
             required='true'
@@ -190,8 +204,8 @@ class Form extends Component {
         />
         <button className="button-a ligth-green" type="submit">Submit</button>
         <label className='mensagem-erro'>{erro}</label>
-        <hr></hr>
-        <p>Já tem uma conta? <Link></Link></p>
+        <hr className="hr-signup"></hr>
+        <p className="already-account">Já tem uma conta? <Link to="/login">Login</Link></p>
       </form>
       </div>
     );

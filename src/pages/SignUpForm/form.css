@@ -1,10 +1,43 @@
-.form {
+.form{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 50px;
 }
 
 .mensagem-erro {
     text-align: center;
     color: red;
+}
+
+.hr-signup{
+    margin: 30px;
+    border: 1px solid rgba(189, 189, 189, 0.47);
+}
+
+.already-account{
+    color:rgb(120,120,120);
+    align-self: center;
+}
+
+.already-account a{
+    color:#4bbf5b;
+    text-decoration:none;
+    font-weight: 700;
+}
+
+.birthday{
+    display: flex;
+    width:100%;
+}
+
+.birthday select{
+    flex-grow: 1
+}
+
+.div-signup{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 100vh;
 }
