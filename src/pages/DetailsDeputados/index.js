@@ -38,12 +38,13 @@ class DetailsDeputados extends Component {
     axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/atual`)
     .then(politicianAtual => {
       if (politicianAtual.data.nomeDeputado !== undefined) {
-        const { sessoes, votos, nomeDeputado, partido, uf, foto, legislatura } = politicianAtual.data;
+        const { sessoes, votos, nomeDeputado, partido, uf, foto, legislatura, email } = politicianAtual.data;
         this.setState({
           politicianName: this.toTitleCase(nomeDeputado),
           partido: partido,
           uf: uf,
           foto: foto,
+          email: email,
           atual: {
             legislatura: legislatura,
             sessoes: {
@@ -125,12 +126,13 @@ class DetailsDeputados extends Component {
     axios.get(`${process.env.REACT_APP_API_URL}/deputados/sessoes/${this.props.match.params.id}/historico`)
     .then(politicianHist => {
       console.log(politicianHist);
-      const { legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto } = politicianHist.data;
+      const { legislaturas, sessoes, votos, nomeDeputado, partido, uf, foto, email } = politicianHist.data;
       this.setState({
         politicianName: this.toTitleCase(nomeDeputado),
         partido: partido,
         uf: uf,
         foto: foto,
+        email: email,
         historico: {
           legislaturas: legislaturas,
           sessoes: {
@@ -351,6 +353,7 @@ class DetailsDeputados extends Component {
               <img src={this.state.foto} alt={`Foto do deputado ${this.state.politicianName}`} />
               <div className="politician-info">
                 <p>Nome: {this.state.politicianName}</p>
+                <p>E-mail: {this.state.email}</p>
                 <p>Partido: {this.state.partido}</p>
                 <p>UF: {this.state.uf}</p>
               </div>
@@ -358,7 +361,7 @@ class DetailsDeputados extends Component {
           {this.state.atual &&
             <div className="info-container">
               <div className='legis-container'>
-                <p className="legis-text"><span>Legislatura:</span> {this.dateToShow(atual.legislatura.dataInicio)} - {this.dateToShow(atual.legislatura.dataFim)}</p>
+                <p className="legis-text"><span>Legislatura:<br/></span> {this.dateToShow(atual.legislatura.dataInicio)} - {this.dateToShow(atual.legislatura.dataFim)}</p>
               </div>
               <div className="charts-container">
                 <div className="presenca-sessoes-container">
@@ -368,6 +371,7 @@ class DetailsDeputados extends Component {
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.sessoes.percentualPresenca}
                   data={atual.charts.sessoes} 
+                  total={atual.sessoes.total}
                   legis="atual" />
                 </div>
                 <div className="presenca-sessoes-container">
@@ -377,6 +381,7 @@ class DetailsDeputados extends Component {
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={atual.votos.percentualDeVotos}
                   data={atual.charts.votacoes} 
+                  total={atual.votos.totalDeVotacoes}
                   legis="atual" />
                 </div>
               </div>
@@ -395,6 +400,7 @@ class DetailsDeputados extends Component {
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={historico.sessoes.percentualPresenca}
                   data={historico.charts.sessoes} 
+                  total={historico.sessoes.total}
                   legis="historico" />
                 </div>
                 <div className="presenca-sessoes-container">
@@ -403,6 +409,7 @@ class DetailsDeputados extends Component {
                   handleChartClick={(dp, legis) => this.handleChartClick(dp, legis)}
                   centerInfo={historico.votos.percentualDeVotos}
                   data={historico.charts.votacoes} 
+                  total={historico.votos.totalDeVotacoes}
                   legis="historico" />
                 </div>
               </div>

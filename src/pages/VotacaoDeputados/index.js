@@ -44,35 +44,53 @@ class VotacaoDeputados extends Component {
   render() { 
     const {documento, proposicao, modo, votos, data} = this.state;
     return ( 
-      <div>
+      <div className="container">
+      <div className="white-box">
       {this.state.proposicao !== '' ?
-      <div>
-        <p><span className="strong">Proposição:</span> {documento.siglaTipo} {documento.numero}/{documento.ano} - {this.proposicaoCamelCase(proposicao)}</p>
-        <p><span className="strong">Modo:</span> {modo}</p>
-        <p><span className="strong">Data de votação:</span> {data}</p>
-        <table>
+      <div className="title-table-container">
+        <div className="title-container">
+          <p className="title"><span>Proposição:</span> {documento.siglaTipo} {documento.numero}/{documento.ano} - {this.proposicaoCamelCase(proposicao)}</p>
+          <p className="title"><span>Modo:</span> {modo}</p>
+          <p className="title"><span>Data de votação:</span> {data}</p>
+        </div>
+      <div className="table-container">
+        <table className="tabela-votos">
           <thead>
             <tr>
-              <th>Parlamentar</th>
+              <th style={{textAlign: "left"}}>Parlamentar</th>
               <th>Voto</th>
             </tr>
           </thead>
           <tbody>
-            {votos && votos.map(voto => {
+            {votos && votos.map((voto, index) => {
               return (
-                <tr>
+                <Fragment className="table-voto">
+                {index % 2 === 0 ?
+                <tr className="voto-link list">
                   <td>
-                    <a onClick={(e) => this.redirectToDeputado(e)} href={'#'} className="voto-link-list">
+                    <a onClick={(e) => this.redirectToDeputado(e)} href={'#'} className="link-dep">
                       {voto.deputado}
                     </a>
                   </td>
-                  <td>{voto.voto}</td>
+                  <td className="voto">{voto.voto}</td>
                 </tr>
+                    :
+                <tr className="voto-link list2">
+                  <td>
+                  <a onClick={(e) => this.redirectToDeputado(e)} href={'#'} className="link-dep">
+                      {voto.deputado}
+                    </a>
+                  </td>
+                  <td className="voto">{voto.voto}</td>
+                </tr>
+                    }
+                </Fragment>
               )
             })
             }
           </tbody>
         </table>
+        </div>
         </div>
         :
         <div className="loading-icon-container">
@@ -80,6 +98,7 @@ class VotacaoDeputados extends Component {
           <p>Carregando</p>
         </div>
       }
+      </div>
       </div>
     );
   }

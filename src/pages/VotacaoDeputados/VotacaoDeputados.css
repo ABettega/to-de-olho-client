@@ -1,9 +1,79 @@
-.strong {
-  font-weight: bold;
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto:900&display=swap');
+
+.white-box {
+  background-color: #f2f2f2;
+  padding: 30px 50px;
+  margin: 10px;
+  box-shadow: 0px 0px 20px 1px rgba(189,189,189,0.47);
+  width: fit-content;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  justify-content: center;
+  align-items: center;
 }
 
-.voto-link-list {
-  display: block;
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.title-container {
+  margin-bottom: 25px;
+}
+
+.title span {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.title {
+  font-family: 'Montserrat';
+  margin-bottom: 10px;
+  color: rgb(120, 120, 120);
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.link-dep {
+  color: #4bbf5b;
+}
+
+table {
+  border-collapse: collapse;
+  box-shadow: 0px 0px 20px 1px rgba(189,189,189,0.47);
+}
+
+table th {
+  background-color: #4bbf5b;
+  padding: 12px;
+  color: white;
+}
+
+.list2 {
+  background-color: white;
+}
+
+.voto-link td {
+  padding: 12px;
+  font-family: 'Montserrat';
+  font-size: 1rem;
+}
+
+.link-dep {
+  font-weight: 500;
+}
+
+.voto-link td > a {
   text-decoration: none;
-  color: black;
+  padding-left: 10px;
+}
+
+.voto {
+  text-align: center;
 }
