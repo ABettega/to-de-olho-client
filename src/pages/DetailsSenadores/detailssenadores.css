@@ -32,7 +32,6 @@
 .loading-icon-container {
   width: 100vw;
   height: 85vh;
-  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -42,16 +41,27 @@
 .loading-icon-historical {
   width: 100vw;
   height: fit-content;
-  
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
+.info-container {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.legis-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .legis-text {
-  font-size: 0.7rem;
-  color: #777;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 .presenca-sessoes-container {
