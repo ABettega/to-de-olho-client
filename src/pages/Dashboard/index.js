@@ -42,7 +42,7 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
 
     this.service
-      .senadorestodos()
+      .senadoresatuais()
       .then(response => {
         this.setState({
           senadorestodos: [...response]
@@ -76,20 +76,7 @@ class Dashboard extends Component {
                 String(senador.IdentificacaoParlamentar.CodigoParlamentar)
               )
             )
-            .map((senador, idx) => {
-              this.axios.get(`http://legis.senado.leg.br/dadosabertos/senador/${senador.IdentificacaoParlamentar.CodigoParlamentar}`)
-                .then((sen) => {
-                  // let counter = 0;
-                  if (this.state.partidosSenadores.length < this.state.senFavoritos.length) {
-                    this.setState({
-                      partidosSenadores: [...this.state.partidosSenadores, sen.data.DetalheParlamentar.Parlamentar.FiliacaoAtual.Partido.SiglaPartido]
-                    })
-                    // counter += 1;
-                  }
-                  
-                  console.log(this.state.partidosSenadores)
-                })
-                .catch((e) => console.log(e))
+            .map((senador) => {
                 return (
                   <CardPolitico
                     className="card-politician-horizontal"
@@ -103,7 +90,7 @@ class Dashboard extends Component {
                     backImage={
                       senador.IdentificacaoParlamentar.UrlFotoParlamentar
                     }
-                    siglaPartido={this.state.partidosSenadores[idx]}
+                    siglaPartido={senador.IdentificacaoParlamentar.SiglaPartidoParlamentar}
                   />
                   );
             })}

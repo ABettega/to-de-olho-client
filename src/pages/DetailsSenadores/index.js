@@ -304,7 +304,6 @@ class DetailsSenadores extends Component {
                 <br></br></p> :
                 <p className="legis-text"><span>Histórico de legislaturas: </span><br></br>
                 {Object.values(this.state.historico.mandatos).map(legis => {
-                  console.log(typeof legis[0], typeof legis[1])
                   if (legis[0] !== null && typeof legis[1] === 'string') {
                     return `${legis[0].slice(0, 4)} - ${legis[1].slice(0, 4)} | `
                   }
