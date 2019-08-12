@@ -2,8 +2,11 @@
 
 ## Colaboradores
 @MFAlexandreMF - Alexandre Montesso Bonomi
+
 @ABettega - Aroldo Bettega Neto
+
 @gabrieladias99 - Gabriela Dias
+
 @porissawa - Pedro Morissawa
 
 ## O que é o [To De Olho!](https://to-de-olho-app.herokuapp.com)?
