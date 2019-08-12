@@ -1,68 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# To De Olho! - Client
 
-## Available Scripts
+## Colaboradores
+@MFAlexandreMF - Alexandre Montesso Bonomi
+@ABettega - Aroldo Bettega Neto
+@gabrieladias99 - Gabriela Dias
+@porissawa - Pedro Morissawa
 
-In the project directory, you can run:
+## O que é o [To De Olho!](https://to-de-olho-app.herokuapp.com)?
+O aplicativo nasceu da necessidade de acompanhar a atuação dos políticos eleitos, para facilitar a prestação de contas para com o povo. A Lei de Acesso a Informação nos garante que todos os dados pertinentes estão livremente disponíveis na web. O Tô De Olho apenas categoriza estes dados de forma mais simples para o usuário.
 
-### `npm start`
+## Detalhes do desenvolvimento
+### Features
+- Leitura de APIs do Senado e Congresso para categorização das informações no Banco de Dados
+- Web Scraper para captura de dados que não estão disponíveis na API do Congresso
+- Possibilidade do usuário marcar políticos para verificar as informações dele mais facilmente
+- Facilidade para ver todas as informações de presenças e votos de cada político em todas as sessões e votações
+- Desenvolvimento Mobile-First
+### Dificuldades
+- A API do Senado, apesar de completa, é muito mal organizada. Foi necessário muito tempo para que os dados fossem trabalhados de modo a ficarem facilmente compreensíveis.
+- A API do Congresso ainda está em desenvolvimento, portanto várias e várias informações precisaram ser buscadas no site do Congresso diretamente, sem API. Para isso, foi desenvolvido um Web Scraper para a captura direta, o que demandou muito tempo e esforço técnico.
+- Outro problema decorrente do fato de a API do Congresso não estar pronta é que as informações nos sites eram inseridas de forma irregular - ou seja, em diversos casos fugiam do padrão, que levava a um retrabalho para realizar a captura corretamente.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Passos Futuros
+- Migrar para um ambiente AWS para que as demandas do servidor sejam automaticamente atendidas
+- Captura de dados de forma automática (via Cron jobs)
+- Envio de email automático para os usuários referente os políticos marcados após cada sessão e votação
+- Mais informações no banco de dados como gastos de cada político.
