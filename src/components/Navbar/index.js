@@ -32,7 +32,7 @@ class Navbar extends Component {
           <div>
           <Link className="nav-a" to="/">
                 <div>
-                <div className="eye-animation"></div>
+                <img className="eye-animation" src="/images/eye-illustration.svg"></img>
                 <img className="logo desappear" src="/images/logov.png" alt="go"/>
                 </div>
               </Link>

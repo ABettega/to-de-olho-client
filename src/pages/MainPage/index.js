@@ -23,7 +23,7 @@ class Main extends Component {
       <Fragment>
         <main>
           <div className="div-main">
-            <img className="eye-main" src="/images/sprite.gif"></img>
+            <img className="eye-main" src="/images/eye-illustration.svg"></img>
             <img className="logo-main" src="/images/logov.png"></img>
           </div>
           <h3>A plataforma para você acompanhar de perto os seus políticos</h3>
