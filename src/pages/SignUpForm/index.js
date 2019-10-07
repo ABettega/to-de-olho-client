@@ -202,7 +202,7 @@ class Form extends Component {
           change={e => this.handleChange(e)}
           value={this.state.password}
         />
-        <button className="button-a ligth-green" type="submit">Submit</button>
+        <button className="button-a light-green" type="submit">Submit</button>
         <label className='mensagem-erro'>{erro}</label>
         <hr className="hr-signup"></hr>
         <p className="already-account">Já tem uma conta? <Link to="/login">Login</Link></p>

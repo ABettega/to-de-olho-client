@@ -85,7 +85,7 @@ class LoginForm extends Component {
             change={e => this.handleChange(e)}
             value={this.state.password}
           />
-          <button className="button-a ligth-green" type="submit">
+          <button className="button-a light-green" type="submit">
             Login
           </button>
           <label className="mensagem-erro">{erro}</label>

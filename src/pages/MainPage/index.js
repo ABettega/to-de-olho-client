@@ -27,7 +27,7 @@ class Main extends Component {
             <img className="logo-main" src="/images/logov.png"></img>
           </div>
           <h3>A plataforma para você acompanhar de perto os seus políticos</h3>
-          <Button  class="ligth-green" to="/pesquisar">FIQUE DE OLHO</Button>
+          <Button class="light-green" to="/pesquisar">FIQUE DE OLHO</Button>
         </main>
         <Slider>
         <CardPolitico 
