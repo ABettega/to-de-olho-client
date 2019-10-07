@@ -1,5 +1,5 @@
 import React from "react";
-import './cardNews.css'
+import styled from "styled-components"
 
 const CardNews = props => {
   return (
