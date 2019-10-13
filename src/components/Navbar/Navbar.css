@@ -1,4 +1,4 @@
-nav {
+/* nav {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -115,19 +115,19 @@ nav div {
     padding-left: 50px;
   }
 }
-
+*/
 @media (min-width: 1200px) {
 }
-.eye-animation {  
+.eye-animation {
   width: 80px;
   height: 53px;
-  background-image: url('/images/eye.png');
+  background-image: url("/images/eye.png");
   background-size: 1800%, 100%;
   background-position: right;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
 }
 
-.eye-animation:hover{
+.eye-animation:hover {
   animation-name: eye-fill;
   animation-duration: 1.3s;
   animation-timing-function: steps(17);
@@ -135,10 +135,10 @@ nav div {
 }
 
 @keyframes eye-fill {
-  from { 
-    background-position: left; 
+  from {
+    background-position: left;
   }
-  to { 
-    background-position: right; 
+  to {
+    background-position: right;
   }
 }
