@@ -5,56 +5,70 @@
    CINZA: #f2f2f2
    VERDE BOTÃO: #89ce64*/
 
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    padding:20px;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 20px;
+  overflow-x: hidden;
 }
 
-h1{
-    font-family: 'Blinker', sans-serif;
-    font-size: 50px;
-    font-weight: 400;
-    color: #4bbf5b;
-    padding-bottom: 15px;
+h1 {
+  font-family: "Blinker", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  color: #4bbf5b;
+  padding-bottom: 15px;
 }
 
-h3{
-    color:#4bbf5b;
-    text-align: center;
+h3 {
+  color: #4bbf5b;
+  text-align: center;
 }
 
-.gif{
-    width:180px;
+.gif {
+  width: 180px;
 }
 
-.logo-main{
-    width: 140px;
-    height: 140px;
-    margin-right: 40px;
+.logo-main {
+  width: 140px;
+  height: 140px;
+  margin-right: 40px;
 }
 
-.eye-main{
-    width: 200px;
+.eye-main {
+  width: 200px;
+  padding: 40px;
+}
+
+.div-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (min-width: 572px) {
+  .eye-main {
+    width: 270px;
+  }
+
+  main {
+    margin-top: 40px;
+    padding: 0 40px 40px;
+  }
+}
+
+@media (max-width: 572px) {
+  .eye-main {
+    display: none;
+  }
+  main {
+    margin-top: 40px;
     padding: 40px;
-}
-
-.div-main{
-    display: flex;
-    flex-direction: row;
-    align-items: center
-}
-
-@media(min-width:572px){
-    .eye-main{
-        width: 270px
-    }
-
-    main{
-        padding:40px;
-    }
-
+  }
+  .logo-main {
+    margin: 0;
+  }
 }

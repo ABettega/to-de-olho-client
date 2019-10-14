@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components";
 
 import AuthService from "../../components/Auth/auth-services";
 // import { url } from "inspector";
@@ -13,13 +13,13 @@ const AddPoli = styled.input`
   top: 0;
   right: 0;
   padding-right: 5px;
-  background-image: url('/images/favorite-unchecked.png');
+  background-image: url("/images/favorite-unchecked.png");
   background-size: 35px 60px;
   background-repeat: no-repeat;
   opacity: 0.9;
 
   :checked {
-    background-image: url('/images/favorite-checked.png');
+    background-image: url("/images/favorite-checked.png");
   }
 
   :hover {
@@ -99,7 +99,7 @@ const Party = styled.div`
   height: 15vw;
   border-radius: 50%;
   /* border: 3px solid #DDD; */
-  box-shadow: 2px 2px 12px #AAA;
+  box-shadow: 2px 2px 12px #aaa;
   background-color: white;
   position: relative;
   top: -36px;
@@ -119,70 +119,89 @@ const PartyImg = styled.img`
 `;
 
 class CardPolitico extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       isChecked: false,
       politician: "",
       user: this.props.user
-    }
+    };
 
     this.service = new AuthService();
-    this.handleChecked = this.handleChecked.bind(this)
-    this.handlePolitician = this.handlePolitician.bind(this)
+    this.handleChecked = this.handleChecked.bind(this);
+    this.handlePolitician = this.handlePolitician.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let isChecked = false;
-    if ((this.props.fav) && this.props.fav.includes(String(this.props.id))) {
+    if (this.props.fav && this.props.fav.includes(String(this.props.id))) {
       isChecked = true;
     }
     this.setState({
       politician: this.props.politician,
       isChecked: isChecked
-    })
+    });
   }
 
-  handleChecked(){
-    this.setState({
-      isChecked: !this.state.isChecked
-    }, this.handlePolitician)
+  handleChecked() {
+    this.setState(
+      {
+        isChecked: !this.state.isChecked
+      },
+      this.handlePolitician
+    );
   }
 
-  handlePolitician(){
-    if(this.state.isChecked){
-      this.service.addpolitician(this.props.id,this.props.politician)
-      .then(response => response)
-      .catch(err => console.log(err))
-    } else{
-      this.service.deletepolitician(this.props.id,this.props.politician)
-      .then(response => response)
-      .catch(err => console.log(err))
+  handlePolitician() {
+    if (this.state.isChecked) {
+      this.service
+        .addpolitician(this.props.id, this.props.politician)
+        .then(response => response)
+        .catch(err => console.log(err));
+    } else {
+      this.service
+        .deletepolitician(this.props.id, this.props.politician)
+        .then(response => response)
+        .catch(err => console.log(err));
     }
   }
 
-  render(){
+  render() {
     return (
       <Fragment>
-      <Container>
-      <CardSlider to={this.props.politician + this.props.id}>
-        <Size100>
-        <Card style={{backgroundImage: `url(${this.props.backImage})`}}/>
-        <Party><PartyImg className="partido-img" src={`/images/partidos/${this.props.siglaPartido}.png`} /></Party>
-        <div className="names">
-          <div className="polit-name-text">
-            <p>{this.props.politicianName}</p>
-            <p>{this.props.uf}</p>
-          </div>
-        </div>
-        </Size100>
-      </CardSlider>
-      {(this.state.user) && <AddPoli className="add-poli" checked={this.state.isChecked} onChange={this.handleChecked} type="checkbox"></AddPoli>}
-      </Container>
+        <Container>
+          <CardSlider to={this.props.politician + this.props.id}>
+            <Size100>
+              <Card
+                style={{ backgroundImage: `url(${this.props.backImage})` }}
+              />
+              <Party>
+                <PartyImg
+                  className="partido-img"
+                  src={`/images/partidos/${this.props.siglaPartido}.png`}
+                />
+              </Party>
+              <div className="names">
+                <div className="polit-name-text">
+                  <p>{this.props.politicianName}</p>
+                  <p>{this.props.uf}</p>
+                </div>
+              </div>
+            </Size100>
+          </CardSlider>
+          {this.state.user && (
+            <AddPoli
+              className="add-poli"
+              checked={this.state.isChecked}
+              onChange={this.handleChecked}
+              type="checkbox"
+            ></AddPoli>
+          )}
+        </Container>
       </Fragment>
     );
   }
-};
+}
 
 export default CardPolitico;
