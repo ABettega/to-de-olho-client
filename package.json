@@ -13,7 +13,7 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^3.3.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "react-transition-group": "^4.2.2",
     "react-vis": "^1.11.7",
     "semantic-ui-react": "^0.87.3",
